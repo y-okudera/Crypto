@@ -17,73 +17,140 @@ public enum DataCipher {
 
 extension DataCipher {
 
-    public enum AESError: Error {
-        case encodingFailed
-        case invalidKeyLength
-        case bufferIsEmpty
-        case cryptoFailed(status: CCCryptorStatus)
-    }
-
     public enum AES {
 
-        // TODO: - Will be impl
-//        public static func createRandomIv() throws -> Data {
-//
-//        }
-//        public static func createRandomSalt() throws -> Data {
-//
-//        }
-//        public static func createKey(commonKey: String, salt: String) throws -> Data {
-//
-//        }
+        public enum Error: Swift.Error {
+            case secRandomCopyBytesFailed(status: Int)
+            case keyGenerationFailed(status: Int)
+            case encodingFailed
+            case invalidKeyLength
+            case bufferIsEmpty
+            case cryptoFailed(status: CCCryptorStatus)
+        }
+
+        public static func generateRandomIv() throws -> Data {
+            return try generateRandom(byteLength: kCCBlockSizeAES128)
+        }
+
+        public static func generateRandomSalt() throws -> Data {
+            let saltSize = 20
+            return try generateRandom(byteLength: saltSize)
+        }
 
         /// 暗号化
         /// - Parameters:
         ///   - plainData: 暗号化するデータ
-        ///   - commonKey: 共通鍵
+        ///   - password: 共通パスワード
+        ///   - salt: ソルト
         ///   - iv: 初期化ベクトル
         /// - Returns: 暗号化されたデータ
-        public static func encrypt(plainData: Data, commonKey: String, iv: String) throws -> Data {
-            return try crypto(operation: .encrypt, sourceData: plainData, commonKey: commonKey, iv: iv)
+        public static func encrypt(plainData: Data, password: String, salt: Data, iv: Data) throws -> Data {
+            return try crypto(operation: .encrypt, sourceData: plainData, password: password, salt: salt, iv: iv)
         }
 
         /// 復号
         /// - Parameters:
         ///   - encryptedData: 復号するデータ
-        ///   - commonKey: 共通鍵
+        ///   - password: 共通パスワード
+        ///   - salt: ソルト
         ///   - iv: 初期化ベクトル
         /// - Returns: 復号されたデータ
-        public static func decrypt(encryptedData: Data, commonKey: String, iv: String) throws -> Data {
-            return try crypto(operation: .decrypt, sourceData: encryptedData, commonKey: commonKey, iv: iv)
+        public static func decrypt(encryptedData: Data, password: String, salt: Data, iv: Data) throws -> Data {
+            return try crypto(operation: .decrypt, sourceData: encryptedData, password: password, salt: salt, iv: iv)
+        }
+
+        /// 共通鍵生成
+        /// - Parameters:
+        ///   - password: 共通パスワード
+        ///   - salt: ソルト
+        /// - Returns: キーデータ
+        private static func createKey(password: String, salt: Data) throws -> Data {
+            let length = kCCKeySizeAES256
+            var derivationStatus = Int32(0)
+            var derivedBytes = [UInt8](repeating: 0, count: length)
+
+            guard let passwordData = password.data(using: .utf8) else {
+                assertionFailure("Encode passwordData failed")
+                throw Self.Error.encodingFailed
+            }
+
+            let passwordBytes = try passwordData.withUnsafeBytes { rawBufferPointer -> UnsafePointer<Int8> in
+                guard let passwordRawBytes = rawBufferPointer.baseAddress else {
+                    assertionFailure("passwordBuffer is empty")
+                    throw Self.Error.bufferIsEmpty
+                }
+                return passwordRawBytes.assumingMemoryBound(to: Int8.self)
+            }
+            let saltBytes = try salt.withUnsafeBytes { rawBufferPointer -> UnsafePointer<UInt8> in
+                guard let saltRawBytes = rawBufferPointer.baseAddress else {
+                    assertionFailure("saltBuffer is empty")
+                    throw Self.Error.bufferIsEmpty
+                }
+                return saltRawBytes.assumingMemoryBound(to: UInt8.self)
+            }
+
+            derivationStatus = CCKeyDerivationPBKDF(
+                CCPBKDFAlgorithm(kCCPBKDF2), // algorithm
+                passwordBytes, // password
+                passwordData.count, // passwordLen
+                saltBytes, // salt
+                salt.count, // saltLen
+                CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA256), // prf
+                10000, // rounds
+                &derivedBytes, // derivedKey
+                length // derivedKeyLen
+            )
+
+            guard derivationStatus == errSecSuccess else {
+                assertionFailure("Key generation failed")
+                throw Self.Error.keyGenerationFailed(status: Int(derivationStatus))
+            }
+            return Data(bytes: &derivedBytes, count: length)
+        }
+
+        /// ランダムデータ生成
+        private static func generateRandom(byteLength: Int) throws -> Data {
+            var outputData = Data(count: byteLength)
+            let outputDataBytes = outputData.withUnsafeMutableBytes { mutableRawBufferPointer -> UnsafeMutablePointer<UInt8>? in
+                let outputDataBufferPointer = mutableRawBufferPointer.bindMemory(to: UInt8.self)
+                return outputDataBufferPointer.baseAddress
+            }
+            guard let outputDataBytes = outputDataBytes else {
+                assertionFailure("outputDataBytes is empty")
+                throw Self.Error.bufferIsEmpty
+            }
+
+            let status = SecRandomCopyBytes(
+                kSecRandomDefault, // rnd
+                byteLength, // count
+                outputDataBytes // bytes
+            )
+
+            guard status == errSecSuccess else {
+                assertionFailure("SecRandomCopyBytes failed byteLength: \(byteLength)")
+                throw Self.Error.secRandomCopyBytesFailed(status: Int(status))
+            }
+            return outputData
         }
 
         /// 暗号化 / 復号処理
         /// - Parameters:
         ///   - operation: 暗号化 or 復号
-        ///   - sourceData: 捜査対象のデータ
-        ///   - commonKey: 共通鍵
+        ///   - sourceData: 操作対象のデータ
+        ///   - password: 共通パスワード
+        ///   - salt: ソルト
         ///   - iv: 初期化ベクトル
         /// - Returns: 処理結果のデータ
-        private static func crypto(operation: CryptoOperationType, sourceData: Data, commonKey: String, iv: String) throws -> Data {
+        private static func crypto(operation: CryptoOperationType, sourceData: Data, password: String, salt: Data, iv: Data) throws -> Data {
             log("start...", operation == .decrypt ? "復号処理" : "暗号化処理")
-            log("commonKey", commonKey)
             log("iv", iv)
             log("sourceData size", sourceData.count)
 
-            guard let initializationVector = iv.data(using: .utf8) else {
-                assertionFailure("Encode iv failed")
-                throw DataCipher.AESError.encodingFailed
-            }
-
-            guard let keyData = commonKey.data(using: .utf8) else {
-                assertionFailure("Encode commonKey failed")
-                throw DataCipher.AESError.encodingFailed
-            }
-
-            log("keyData.count", keyData.count, "kCCKeySizeAES256", kCCKeySizeAES256)
-            guard keyData.count == kCCKeySizeAES256 else {
+            let commonKeyData = try createKey(password: password, salt: salt)
+            log("commonKeyData.count", commonKeyData.count, "kCCKeySizeAES256", kCCKeySizeAES256)
+            guard commonKeyData.count == kCCKeySizeAES256 else {
                 assertionFailure("CommonKey invalid size")
-                throw DataCipher.AESError.invalidKeyLength
+                throw Self.Error.invalidKeyLength
             }
 
             let outputLength: size_t = {
@@ -100,65 +167,65 @@ extension DataCipher {
             var outputData = Data(count: outputLength)
             var numBytesEncrypted: size_t = 0
 
-            let outputAddress = try outputData.withUnsafeMutableBytes { outputMutableRawBufferPointer -> UnsafeMutablePointer<UInt8> in
-                log("outputMutableRawBufferPointer", outputMutableRawBufferPointer)
-                let outputBufferPointer = outputMutableRawBufferPointer.bindMemory(to: UInt8.self)
+            let outputDataBytes = try outputData.withUnsafeMutableBytes { mutableRawBufferPointer -> UnsafeMutablePointer<UInt8> in
+                log("outputMutableRawBufferPointer", mutableRawBufferPointer)
+                let outputBufferPointer = mutableRawBufferPointer.bindMemory(to: UInt8.self)
 
-                guard let outputAddress = outputBufferPointer.baseAddress else {
+                guard let outputDataBytes = outputBufferPointer.baseAddress else {
                     assertionFailure("outputBuffer is empty")
-                    throw DataCipher.AESError.bufferIsEmpty
+                    throw Self.Error.bufferIsEmpty
                 }
-                return outputAddress
+                return outputDataBytes
             }
 
-            let ivAddress = try initializationVector.withUnsafeBytes { ivMutableRawBufferPointer -> UnsafePointer<UInt8> in
-                log("ivMutableRawBufferPointer", ivMutableRawBufferPointer)
-                let ivBufferPointer = ivMutableRawBufferPointer.bindMemory(to: UInt8.self)
+            let ivBytes = try iv.withUnsafeBytes { rawBufferPointer -> UnsafePointer<UInt8> in
+                log("ivMutableRawBufferPointer", rawBufferPointer)
+                let ivBufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
 
-                guard let ivAddress = ivBufferPointer.baseAddress else {
+                guard let ivBytes = ivBufferPointer.baseAddress else {
                     assertionFailure("ivBuffer is empty")
-                    throw DataCipher.AESError.bufferIsEmpty
+                    throw Self.Error.bufferIsEmpty
                 }
-                return ivAddress
+                return ivBytes
             }
 
-            let sourceDataAddress = try sourceData.withUnsafeBytes { sourceDataMutableRawBufferPointer -> UnsafePointer<UInt8> in
-                log("sourceDataMutableRawBufferPointer", sourceDataMutableRawBufferPointer)
-                let sourceDataBufferPointer = sourceDataMutableRawBufferPointer.bindMemory(to: UInt8.self)
-                guard let sourceDataAddress = sourceDataBufferPointer.baseAddress else {
+            let sourceDataBytes = try sourceData.withUnsafeBytes { rawBufferPointer -> UnsafePointer<UInt8> in
+                log("sourceDataMutableRawBufferPointer", rawBufferPointer)
+                let sourceDataBufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+                guard let sourceDataBytes = sourceDataBufferPointer.baseAddress else {
                     assertionFailure("sourceDataBuffer is empty")
-                    throw DataCipher.AESError.bufferIsEmpty
+                    throw Self.Error.bufferIsEmpty
                 }
-                return sourceDataAddress
+                return sourceDataBytes
             }
 
-            let keyAddress = try keyData.withUnsafeBytes { keyMutableRawBufferPointer -> UnsafePointer<UInt8> in
-                log("keyMutableRawBufferPointer", keyMutableRawBufferPointer)
-                let keyBufferPointer = keyMutableRawBufferPointer.bindMemory(to: UInt8.self)
-                guard let keyAddress = keyBufferPointer.baseAddress else {
-                    assertionFailure("keyBuffer is empty")
-                    throw DataCipher.AESError.bufferIsEmpty
+            let commonKeyDataBytes = try commonKeyData.withUnsafeBytes { rawBufferPointer -> UnsafePointer<UInt8> in
+                log("commonKeyMutableRawBufferPointer", rawBufferPointer)
+                let commonKeyBufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+                guard let commonKeyDataBytes = commonKeyBufferPointer.baseAddress else {
+                    assertionFailure("commonKeyBuffer is empty")
+                    throw Self.Error.bufferIsEmpty
                 }
-                return keyAddress
+                return commonKeyDataBytes
             }
 
             // 暗号化 / 復号処理
             let cryptStatus = CCCrypt(
-                CCOperation(operation == .decrypt ? kCCDecrypt : kCCEncrypt),
-                CCAlgorithm(kCCAlgorithmAES),
-                CCOptions(kCCOptionPKCS7Padding),
-                keyAddress,
-                keyData.count,
-                ivAddress,
-                sourceDataAddress,
-                sourceData.count,
-                outputAddress,
-                outputLength,
-                &numBytesEncrypted
+                CCOperation(operation == .decrypt ? kCCDecrypt : kCCEncrypt), // op
+                CCAlgorithm(kCCAlgorithmAES), // alg
+                CCOptions(kCCOptionPKCS7Padding), // options
+                commonKeyDataBytes, // key
+                commonKeyData.count, // keyLength
+                ivBytes, // iv
+                sourceDataBytes, // dataIn
+                sourceData.count, // dataInLength
+                outputDataBytes, // dataOut
+                outputLength, // dataOutAvailable
+                &numBytesEncrypted // dataOutMoved
             )
 
             guard cryptStatus == kCCSuccess else {
-                throw DataCipher.AESError.cryptoFailed(status: cryptStatus)
+                throw Self.Error.cryptoFailed(status: cryptStatus)
             }
 
             log("outputData.count", outputData.count, "outputData.prefix(numBytesEncrypted)", outputData.prefix(numBytesEncrypted))
