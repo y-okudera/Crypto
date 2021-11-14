@@ -1,14 +1,14 @@
 //
-//  PresentationTests.swift
-//  PresentationTests
+//  DataSourceTests.swift
+//  DataSourceTests
 //
-//  Created by Yuki Okudera on 2021/11/13.
+//  Created by Yuki Okudera on 2021/11/14.
 //
 
 import XCTest
-@testable import Presentation
+@testable import DataSource
 
-class PresentationTests: XCTestCase {
+class DataSourceTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
