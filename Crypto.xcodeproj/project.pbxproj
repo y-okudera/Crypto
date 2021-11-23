@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */; };
+		B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */; };
+		B6171B17274D4B7500D19351 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NotificationNames.swift */; };
 		B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF2273FFA300060CF4A /* AppDelegate.swift */; };
 		B65B3DF5273FFA300060CF4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */; };
 		B65B3DF7273FFA300060CF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF6273FFA300060CF4A /* ViewController.swift */; };
@@ -25,7 +28,6 @@
 		B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* DataCipher.swift */; };
 		B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */; };
 		B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9E27403A2C0060CF4A /* Logger.swift */; };
-		B65B3EA12740B3E20060CF4A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B65B3EA02740B3E20060CF4A /* .gitkeep */; };
 		B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +84,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurationGenerator.swift; sourceTree = "<group>"; };
+		B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSource.swift; sourceTree = "<group>"; };
+		B6171B16274D4B7500D19351 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		B65B3DEF273FFA300060CF4A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B3DF2273FFA300060CF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +108,6 @@
 		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
 		B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileDataSource.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B65B3EA02740B3E20060CF4A /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoFileContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,10 +210,10 @@
 		B65B3E7727401EB70060CF4A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3EA2274114760060CF4A /* Entity */,
-				B65B3E9727401F0A0060CF4A /* Utility */,
-				B65B3E9627401EF00060CF4A /* Resource */,
 				B65B3E9327401ECA0060CF4A /* DataSource */,
+				B65B3EA2274114760060CF4A /* Entity */,
+				B65B3E9627401EF00060CF4A /* Resource */,
+				B65B3E9727401F0A0060CF4A /* Utility */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -225,8 +229,8 @@
 		B65B3E9327401ECA0060CF4A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E9527401EE60060CF4A /* Remote */,
 				B65B3E9427401EDC0060CF4A /* Local */,
+				B65B3E9527401EE60060CF4A /* Remote */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -242,7 +246,8 @@
 		B65B3E9527401EE60060CF4A /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3EA02740B3E20060CF4A /* .gitkeep */,
+				B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */,
+				B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -259,8 +264,8 @@
 		B65B3E9727401F0A0060CF4A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E9D27403A200060CF4A /* Logger */,
 				B65B3E9827401F110060CF4A /* DataCipher */,
+				B65B3E9D27403A200060CF4A /* Logger */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */,
+				B6171B16274D4B7500D19351 /* NotificationNames.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -484,7 +490,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B65B3EA12740B3E20060CF4A /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +537,9 @@
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
 				B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */,
+				B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */,
+				B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */,
+				B6171B17274D4B7500D19351 /* NotificationNames.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
 				B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */,
 			);

@@ -19,11 +19,30 @@ class ViewController: UIViewController {
         return imageView
     }()
 
+    let downloadDataSource = DownloadDataSourceProvider.provide()
     let localFileDataSource = LocalFileDataSourceProvider.provide()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadIfExists()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(enterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+
+        // foreground download
+        let url = URL(string: "https://placehold.jp/24/cc9999/993333/150x100.png")!
+        downloadDataSource.execute(url: url)
+    }
+
+    @objc
+    private func enterBackground() {
+
+        // background download
+        let url = URL(string: "https://placehold.jp/24/cc9999/993333/150x100.png")!
+        downloadDataSource.execute(url: url)
     }
 }
 

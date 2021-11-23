@@ -13,13 +13,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var backgroundCompletionHandler: (() -> Void)?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadCompleted), name: NotificationNames.downloadCompleted, object: nil)
 
         // ダウンロードファイルを保存するためのディレクトリを作成する
         LocalFileDataSourceProvider.provide().createDownloadDataDirectory()
 
         return true
+    }
+
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        print(#function, "identifier: \(identifier)")
+        backgroundCompletionHandler = completionHandler
+    }
+
+    @objc
+    private func downloadCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            print("downloadCompleted", self?.backgroundCompletionHandler)
+            self?.backgroundCompletionHandler?()
+            self?.backgroundCompletionHandler = nil
+        }
     }
 }
 

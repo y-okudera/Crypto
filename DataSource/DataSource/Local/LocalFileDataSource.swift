@@ -18,7 +18,15 @@ public protocol LocalFileDataSource {
     /// ダウンロードファイルを保存するためのディレクトリを作成する
     func createDownloadDataDirectory()
 
-    /// DownloadDataディレクトリにファイルを保存する
+    /// DownloadDataディレクトリにファイルを保存する（暗号化なし）
+    /// - Parameters:
+    ///   - data: 保存するデータ
+    ///   - name: ファイル名 e.g. sample.png
+    /// - Returns: 保存 成功 or 失敗
+    @discardableResult
+    func writeFile(data: Data, name: String) -> Bool
+
+    /// DownloadDataディレクトリにファイルを保存する（暗号化あり）
     /// - Parameters:
     ///   - data: 保存するデータ
     ///   - cryptoFileContext: 暗号化するファイルの情報
@@ -65,6 +73,26 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
             try url.setResourceValue(true, forKey: URLResourceKey.isExcludedFromBackupKey)
         } catch {
             log("Sets the URL’s resource property error", error)
+        }
+    }
+
+    /// DownloadDataディレクトリにファイルを保存する（暗号化なし）
+    /// - Parameters:
+    ///   - data: 保存するデータ
+    ///   - name: ファイル名 e.g. sample.png
+    /// - Returns: 保存 成功 or 失敗
+    @discardableResult
+    func writeFile(data: Data, name: String) -> Bool {
+        let downloadDataDirectory = self.downloadDataDirectory
+        let destination = downloadDataDirectory.appendingPathComponent(name, isDirectory: false)
+        log("destination", destination.absoluteString)
+
+        do {
+            try data.write(to: destination, options: .atomic)
+            return true
+        } catch {
+            assertionFailure("Write to file error: \(error)")
+            return false
         }
     }
 
