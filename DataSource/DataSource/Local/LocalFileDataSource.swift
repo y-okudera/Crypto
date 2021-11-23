@@ -1,5 +1,5 @@
 //
-//  LocalFileDataStore.swift
+//  LocalFileDataSource.swift
 //  DataSource
 //
 //  Created by Yuki Okudera on 2021/11/14.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-public enum LocalFileDataStoreProvider {
-    public static func provide() -> LocalFileDataStore {
-        return LocalFileDataStoreImpl()
+public enum LocalFileDataSourceProvider {
+    public static func provide() -> LocalFileDataSource {
+        return LocalFileDataSourceImpl()
     }
 }
 
-public protocol LocalFileDataStore {
+public protocol LocalFileDataSource {
 
     /// ダウンロードファイルを保存するためのディレクトリを作成する
     func createDownloadDataDirectory()
@@ -35,7 +35,7 @@ public protocol LocalFileDataStore {
     func readFile(cryptoFileContext: CryptoFileContext, password: String) -> Data?
 }
 
-final class LocalFileDataStoreImpl: LocalFileDataStore {
+final class LocalFileDataSourceImpl: LocalFileDataSource {
 
     init() {}
 

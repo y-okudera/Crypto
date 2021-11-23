@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         return imageView
     }()
 
-    let localFileDataStore = LocalFileDataStoreProvider.provide()
+    let localFileDataSource = LocalFileDataSourceProvider.provide()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ extension ViewController {
         // 未保存なら、一度保存してから読み込んで表示する
         if let data = self.loadSaltAndIv() {
             print("保存済みの情報で復号")
-            if let decryptedData = localFileDataStore.readFile(
+            if let decryptedData = localFileDataSource.readFile(
                 cryptoFileContext: .init(fileName: "dog.png", salt: data.salt, iv: data.iv),
                 password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
             ) {
@@ -53,13 +53,13 @@ extension ViewController {
             let iv = try! DataCipher.AES.generateRandomIv()
 
             saveSaltAndIv(salt: salt, iv: iv)
-            localFileDataStore.writeFile(
+            localFileDataSource.writeFile(
                 data: data,
                 cryptoFileContext: .init(fileName: "dog.png", salt: salt, iv: iv),
                 password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
             )
 
-            if let decryptedData = localFileDataStore.readFile(
+            if let decryptedData = localFileDataSource.readFile(
                 cryptoFileContext: .init(fileName: "dog.png", salt: salt, iv: iv),
                 password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
             ) {

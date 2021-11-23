@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         // ダウンロードファイルを保存するためのディレクトリを作成する
-        LocalFileDataStoreProvider.provide().createDownloadDataDirectory()
+        LocalFileDataSourceProvider.provide().createDownloadDataDirectory()
 
         return true
     }

@@ -23,7 +23,7 @@
 		B65B3E8B27401EB70060CF4A /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; };
 		B65B3E8C27401EB70060CF4A /* DataSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* DataCipher.swift */; };
-		B65B3E9C274039420060CF4A /* LocalFileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* LocalFileDataStore.swift */; };
+		B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */; };
 		B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9E27403A2C0060CF4A /* Logger.swift */; };
 		B65B3EA12740B3E20060CF4A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B65B3EA02740B3E20060CF4A /* .gitkeep */; };
 		B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */; };
@@ -101,7 +101,7 @@
 		B65B3E7F27401EB70060CF4A /* DataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B3E8627401EB70060CF4A /* DataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
-		B65B3E9B274039420060CF4A /* LocalFileDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileDataStore.swift; sourceTree = "<group>"; };
+		B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileDataSource.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B65B3EA02740B3E20060CF4A /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoFileContext.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				B65B3EA2274114760060CF4A /* Entity */,
 				B65B3E9727401F0A0060CF4A /* Utility */,
 				B65B3E9627401EF00060CF4A /* Resource */,
-				B65B3E9327401ECA0060CF4A /* DataStore */,
+				B65B3E9327401ECA0060CF4A /* DataSource */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -222,19 +222,19 @@
 			path = DataSourceTests;
 			sourceTree = "<group>";
 		};
-		B65B3E9327401ECA0060CF4A /* DataStore */ = {
+		B65B3E9327401ECA0060CF4A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				B65B3E9527401EE60060CF4A /* Remote */,
 				B65B3E9427401EDC0060CF4A /* Local */,
 			);
-			path = DataStore;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		B65B3E9427401EDC0060CF4A /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E9B274039420060CF4A /* LocalFileDataStore.swift */,
+				B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -531,7 +531,7 @@
 			files = (
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
-				B65B3E9C274039420060CF4A /* LocalFileDataStore.swift in Sources */,
+				B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
 				B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */,
 			);
