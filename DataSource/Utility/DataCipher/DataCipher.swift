@@ -39,27 +39,35 @@ extension DataCipher {
 
         /// 暗号化
         /// - Parameters:
-        ///   - plainData: 暗号化するデータ
+        ///   - encryptContext: コンテキスト
         ///   - password: 共通パスワード
-        ///   - salt: ソルト
-        ///   - iv: 初期化ベクトル
         /// - Returns: 暗号化されたデータ
-        public static func encrypt(plainData: Data, password: String, salt: Data, iv: Data) throws -> Data {
-            return try crypto(operation: .encrypt, sourceData: plainData, password: password, salt: salt, iv: iv)
+        public static func encrypt(encryptContext: EncryptContext, password: String) throws -> Data {
+            return try crypto(
+                operation: .encrypt,
+                sourceData: encryptContext.plainData,
+                password: password,
+                salt: encryptContext.salt,
+                iv: encryptContext.iv
+            )
         }
 
         /// 復号
         /// - Parameters:
-        ///   - encryptedData: 復号するデータ
+        ///   - decryptContext: コンテキスト
         ///   - password: 共通パスワード
-        ///   - salt: ソルト
-        ///   - iv: 初期化ベクトル
         /// - Returns: 復号されたデータ
-        public static func decrypt(encryptedData: Data, password: String, salt: Data, iv: Data) throws -> Data {
-            return try crypto(operation: .decrypt, sourceData: encryptedData, password: password, salt: salt, iv: iv)
+        public static func decrypt(decryptContext: DecryptContext, password: String) throws -> Data {
+            return try crypto(
+                operation: .decrypt,
+                sourceData: decryptContext.encryptedData,
+                password: password,
+                salt: decryptContext.salt,
+                iv: decryptContext.iv
+            )
         }
 
-        /// 共通鍵生成
+        /// キー生成
         /// - Parameters:
         ///   - password: 共通パスワード
         ///   - salt: ソルト

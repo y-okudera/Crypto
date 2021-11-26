@@ -58,12 +58,18 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
             UserDefaults.standard.set(iv, forKey: "demo_iv")
 
             let localFileDataSource = LocalFileDataSourceProvider.provide()
+            let encryptFileContext = EncryptFileContext(
+                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("encrypted.png").path,
+                encryptContext: .init(plainData: data, salt: salt, iv: iv)
+            )
             localFileDataSource.writeFile(
-                data: data,
-                cryptoFileContext: .init(fileName: "encrypted.png", salt: salt, iv: iv),
+                encryptFileContext: encryptFileContext,
                 password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
             )
-            localFileDataSource.writeFile(data: data, name: "plain.png")
+            localFileDataSource.writeFile(
+                data: data,
+                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("plain.png").path
+            )
 
         } catch {
             log(error)

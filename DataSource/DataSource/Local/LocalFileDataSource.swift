@@ -15,39 +15,44 @@ public enum LocalFileDataSourceProvider {
 
 public protocol LocalFileDataSource {
 
+    var downloadDataDirectory: URL { get }
+
     /// ダウンロードファイルを保存するためのディレクトリを作成する
     func createDownloadDataDirectory()
 
-    /// DownloadDataディレクトリにファイルを保存する（暗号化なし）
+    /// ファイルを保存する（暗号化なし）
     /// - Parameters:
     ///   - data: 保存するデータ
-    ///   - name: ファイル名 e.g. sample.png
+    ///   - filePath: ファイルパス
     /// - Returns: 保存 成功 or 失敗
     @discardableResult
-    func writeFile(data: Data, name: String) -> Bool
+    func writeFile(data: Data, filePath: String) -> Bool
 
-    /// DownloadDataディレクトリにファイルを保存する（暗号化あり）
+    /// ファイルを保存する（暗号化あり）
     /// - Parameters:
-    ///   - data: 保存するデータ
-    ///   - cryptoFileContext: 暗号化するファイルの情報
+    ///   - encryptFileContext: 暗号化するファイルの情報
     ///   - password: 共通パスワード
     /// - Returns: 保存 成功 or 失敗
     @discardableResult
-    func writeFile(data: Data, cryptoFileContext: CryptoFileContext, password: String) -> Bool
+    func writeFile(encryptFileContext: EncryptFileContext, password: String) -> Bool
 
-    /// DownloadDataディレクトリのファイルを読み込む
+    /// ファイルを読み込む（復号なし）
+    /// - Returns: ファイルのデータ
+    func readFile(filePath: String) -> Data?
+
+    /// ファイルを読み込む（復号あり）
     /// - Parameters:
-    ///   - cryptoFileContext: 復号するファイルの情報
+    ///   - decryptFileContext: 復号するファイルの情報
     ///   - password: 共通パスワード
     /// - Returns: 復号済みのデータ　復号失敗時はnil
-    func readFile(cryptoFileContext: CryptoFileContext, password: String) -> Data?
+    func readFile(decryptFileContext: DecryptFileContext, password: String) -> Data?
 }
 
 final class LocalFileDataSourceImpl: LocalFileDataSource {
 
     init() {}
 
-    private var downloadDataDirectory: URL {
+    public var downloadDataDirectory: URL {
         let libraryDirectory = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         return libraryDirectory.appendingPathComponent("DownloadData", isDirectory: true)
     }
@@ -76,16 +81,15 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
         }
     }
 
-    /// DownloadDataディレクトリにファイルを保存する（暗号化なし）
+    /// ファイルを保存する（暗号化なし）
     /// - Parameters:
     ///   - data: 保存するデータ
-    ///   - name: ファイル名 e.g. sample.png
+    ///   - filePath: ファイルパス
     /// - Returns: 保存 成功 or 失敗
     @discardableResult
-    func writeFile(data: Data, name: String) -> Bool {
-        let downloadDataDirectory = self.downloadDataDirectory
-        let destination = downloadDataDirectory.appendingPathComponent(name, isDirectory: false)
-        log("destination", destination.absoluteString)
+    func writeFile(data: Data, filePath: String) -> Bool {
+        let destination = URL(fileURLWithPath: filePath)
+        log("destination", filePath)
 
         do {
             try data.write(to: destination, options: .atomic)
@@ -96,25 +100,20 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
         }
     }
 
-    /// DownloadDataディレクトリにファイルを保存する
+    /// ファイルを保存する
     /// - Parameters:
-    ///   - data: 保存するデータ
-    ///   - cryptoFileContext: 暗号化するファイルの情報
+    ///   - encryptFileContext: 暗号化するファイルの情報
     ///   - password: 共通パスワード
     /// - Returns: 保存 成功 or 失敗
     @discardableResult
-    func writeFile(data: Data, cryptoFileContext: CryptoFileContext, password: String) -> Bool {
-        let downloadDataDirectory = self.downloadDataDirectory
-        let destination = downloadDataDirectory.appendingPathComponent(cryptoFileContext.fileName, isDirectory: false)
-        log("destination", destination.absoluteString)
-
+    func writeFile(encryptFileContext: EncryptFileContext, password: String) -> Bool {
         do {
             let encryptedData = try DataCipher.AES.encrypt(
-                plainData: data,
-                password: password,
-                salt: cryptoFileContext.salt,
-                iv: cryptoFileContext.iv
+                encryptContext: encryptFileContext.encryptContext,
+                password: password
             )
+            let destination = URL(fileURLWithPath: encryptFileContext.filePath)
+            log("destination", destination.absoluteURL)
             try encryptedData.write(to: destination, options: .atomic)
             return true
         } catch let aesError as DataCipher.AES.Error {
@@ -126,26 +125,28 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
         }
     }
 
-    /// DownloadDataディレクトリのファイルを読み込む
+    /// ファイルを読み込む（復号なし）
+    /// - Returns: ファイルのデータ
+    func readFile(filePath: String) -> Data? {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+            return data
+        } catch {
+            log("URL cannot be read.", error)
+            return nil
+        }
+    }
+
+    /// ファイルを読み込む
     /// - Parameters:
-    ///   - cryptoFileContext: 復号するファイルの情報
+    ///   - decryptFileContext: 復号するファイルの情報
     ///   - password: 共通パスワード
     /// - Returns: 復号済みのデータ　復号失敗時はnil
-    func readFile(cryptoFileContext: CryptoFileContext, password: String) -> Data? {
-        let downloadDataDirectory = self.downloadDataDirectory
-        let source = downloadDataDirectory.appendingPathComponent(cryptoFileContext.fileName, isDirectory: false)
-        log("source", source.absoluteString)
-
-        let fileUrl = URL(fileURLWithPath: source.path)
-
+    func readFile(decryptFileContext: DecryptFileContext, password: String) -> Data? {
         do {
-            let encryptedData = try Data(contentsOf: URL(fileURLWithPath: fileUrl.path))
-            let data = try DataCipher.AES.decrypt(
-                encryptedData: encryptedData,
-                password: password,
-                salt: cryptoFileContext.salt,
-                iv: cryptoFileContext.iv
-            )
+            let encryptedData = try Data(contentsOf: URL(fileURLWithPath: decryptFileContext.filePath))
+            let decryptContext = DecryptContext(encryptedData: encryptedData, salt: decryptFileContext.salt, iv: decryptFileContext.iv)
+            let data = try DataCipher.AES.decrypt(decryptContext: decryptContext, password: password)
             return data
         } catch let aesError as DataCipher.AES.Error {
             log("DataCipher.AES.decrypt AESError", aesError)

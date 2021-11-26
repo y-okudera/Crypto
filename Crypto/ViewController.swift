@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadIfExists()
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(enterBackground),
@@ -54,8 +56,14 @@ extension ViewController {
         // 未保存なら、一度保存してから読み込んで表示する
         if let data = self.loadSaltAndIv() {
             print("保存済みの情報で復号")
+
+            let decryptFileContext = DecryptFileContext(
+                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("dog.png").path,
+                salt: data.salt,
+                iv: data.iv
+            )
             if let decryptedData = localFileDataSource.readFile(
-                cryptoFileContext: .init(fileName: "dog.png", salt: data.salt, iv: data.iv),
+                decryptFileContext: decryptFileContext,
                 password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
             ) {
                 imageView?.image = UIImage(data: decryptedData)
@@ -72,31 +80,24 @@ extension ViewController {
             let iv = try! DataCipher.AES.generateRandomIv()
 
             saveSaltAndIv(salt: salt, iv: iv)
-            localFileDataSource.writeFile(
-                data: data,
-                cryptoFileContext: .init(fileName: "dog.png", salt: salt, iv: iv),
-                password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
+            let encryptContext = EncryptContext(plainData: data, salt: salt, iv: iv)
+            let encryptFileContext = EncryptFileContext(
+                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("dog.png").path,
+                encryptContext: encryptContext
             )
+            localFileDataSource.writeFile(encryptFileContext: encryptFileContext, password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM")
 
-            if let decryptedData = localFileDataSource.readFile(
-                cryptoFileContext: .init(fileName: "dog.png", salt: salt, iv: iv),
-                password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
-            ) {
-                imageView?.image = UIImage(data: decryptedData)
-            } else {
-                // FIXME: - Will be deleting files and database records.
-                print("復号失敗")
-            }
+            imageView?.image = dogImage
         }
     }
 
     private func saveSaltAndIv(salt: Data, iv: Data) {
-        UserDefaults.standard.set(salt, forKey: "demo_salt")
-        UserDefaults.standard.set(iv, forKey: "demo_iv")
+        UserDefaults.standard.set(salt, forKey: "dog_salt")
+        UserDefaults.standard.set(iv, forKey: "dog_iv")
     }
 
     private func loadSaltAndIv() -> (salt: Data, iv: Data)? {
-        guard let salt = UserDefaults.standard.data(forKey: "demo_salt"), let iv = UserDefaults.standard.data(forKey: "demo_iv") else {
+        guard let salt = UserDefaults.standard.data(forKey: "dog_salt"), let iv = UserDefaults.standard.data(forKey: "dog_iv") else {
             return nil
         }
         return (salt: salt, iv: iv)
