@@ -20,21 +20,8 @@ public protocol LocalFileDataSource {
     /// ダウンロードファイルを保存するためのディレクトリを作成する
     func createDownloadDataDirectory()
 
-    /// ファイルを保存する（暗号化なし）
-    /// - Parameters:
-    ///   - data: 保存するデータ
-    ///   - filePath: ファイルパス
-    /// - Returns: 保存 成功 or 失敗
-    @discardableResult
-    func writeFile(data: Data, filePath: String) -> Bool
-
-    /// ファイルを保存する（暗号化あり）
-    /// - Parameters:
-    ///   - encryptFileContext: 暗号化するファイルの情報
-    ///   - password: 共通パスワード
-    /// - Returns: 保存 成功 or 失敗
-    @discardableResult
-    func writeFile(encryptFileContext: EncryptFileContext, password: String) -> Bool
+    /// URLSessionでダウンロードしたデータをファイルに書き込む（暗号化あり）
+    func writeFile(downloadContext: DownloadContext, from location: URL)
 
     /// ファイルを読み込む（復号なし）
     /// - Returns: ファイルのデータ
@@ -81,47 +68,27 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
         }
     }
 
-    /// ファイルを保存する（暗号化なし）
-    /// - Parameters:
-    ///   - data: 保存するデータ
-    ///   - filePath: ファイルパス
-    /// - Returns: 保存 成功 or 失敗
-    @discardableResult
-    func writeFile(data: Data, filePath: String) -> Bool {
-        let destination = URL(fileURLWithPath: filePath)
-        log("destination", filePath)
-
+    /// URLSessionでダウンロードしたデータをファイルに書き込む（暗号化あり）
+    func writeFile(downloadContext: DownloadContext, from location: URL) {
+        // write to files.
         do {
-            try data.write(to: destination, options: .atomic)
-            return true
-        } catch {
-            assertionFailure("Write to file error: \(error)")
-            return false
-        }
-    }
+            let reader = try FileHandle(forReadingFrom: location)
+            let data = reader.readDataToEndOfFile()
 
-    /// ファイルを保存する
-    /// - Parameters:
-    ///   - encryptFileContext: 暗号化するファイルの情報
-    ///   - password: 共通パスワード
-    /// - Returns: 保存 成功 or 失敗
-    @discardableResult
-    func writeFile(encryptFileContext: EncryptFileContext, password: String) -> Bool {
-        do {
-            let encryptedData = try DataCipher.AES.encrypt(
-                encryptContext: encryptFileContext.encryptContext,
-                password: password
-            )
-            let destination = URL(fileURLWithPath: encryptFileContext.filePath)
-            log("destination", destination.absoluteURL)
-            try encryptedData.write(to: destination, options: .atomic)
-            return true
-        } catch let aesError as DataCipher.AES.Error {
-            log("DataCipher.AES.encrypt AESError", aesError)
-            return false
+            let encryptContext = try EncryptContext(plainData: data)
+            let encryptFileContext = EncryptFileContext(filePath: downloadContext.filePath, encryptContext: encryptContext)
+
+            // TODO: - Save salt and iv and filePath to database.
+
+            writeFile(encryptFileContext: encryptFileContext, password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM")
+#if DEBUG
+            // Save plain data for debugging.
+            let filePath = downloadDataDirectory.appendingPathComponent("\(downloadContext.taskId).png").path
+            writeFile(data: data, filePath: filePath)
+#endif
+
         } catch {
-            assertionFailure("Write to file error: \(error)")
-            return false
+            log(error)
         }
     }
 
@@ -154,6 +121,52 @@ final class LocalFileDataSourceImpl: LocalFileDataSource {
         } catch {
             log("URL cannot be read.", error)
             return nil
+        }
+    }
+}
+
+extension LocalFileDataSourceImpl {
+    /// ファイルを保存する（暗号化なし）
+    /// - Parameters:
+    ///   - data: 保存するデータ
+    ///   - filePath: ファイルパス
+    /// - Returns: 保存 成功 or 失敗
+    @discardableResult
+    private func writeFile(data: Data, filePath: String) -> Bool {
+        let destination = URL(fileURLWithPath: filePath)
+        log("destination", filePath)
+
+        do {
+            try data.write(to: destination, options: .atomic)
+            return true
+        } catch {
+            assertionFailure("Write to file error: \(error)")
+            return false
+        }
+    }
+
+    /// ファイルを保存する
+    /// - Parameters:
+    ///   - encryptFileContext: 暗号化するファイルの情報
+    ///   - password: 共通パスワード
+    /// - Returns: 保存 成功 or 失敗
+    @discardableResult
+    private func writeFile(encryptFileContext: EncryptFileContext, password: String) -> Bool {
+        do {
+            let encryptedData = try DataCipher.AES.encrypt(
+                encryptContext: encryptFileContext.encryptContext,
+                password: password
+            )
+            let destination = URL(fileURLWithPath: encryptFileContext.filePath)
+            log("destination", destination.absoluteURL)
+            try encryptedData.write(to: destination, options: .atomic)
+            return true
+        } catch let aesError as DataCipher.AES.Error {
+            log("DataCipher.AES.encrypt AESError", aesError)
+            return false
+        } catch {
+            assertionFailure("Write to file error: \(error)")
+            return false
         }
     }
 }

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(downloadCompleted), name: NotificationNames.downloadCompleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadCompleted), name: .downloadCompleted, object: nil)
 
         // ダウンロードファイルを保存するためのディレクトリを作成する
         LocalFileDataSourceProvider.provide().createDownloadDataDirectory()
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc
     private func downloadCompleted() {
         DispatchQueue.main.async { [weak self] in
-            print("downloadCompleted", self?.backgroundCompletionHandler)
+            print(#function)
             self?.backgroundCompletionHandler?()
             self?.backgroundCompletionHandler = nil
         }

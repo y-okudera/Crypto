@@ -6,27 +6,44 @@
 //
 
 import Foundation
-import UIKit
 
 public enum DownloadDataSourceProvider {
     public static func provide() -> DownloadDataSource {
-        return DownloadDataSourceImpl()
+        return DownloadDataSourceImpl(localFileDataSource: LocalFileDataSourceProvider.provide())
     }
 }
 
 public protocol DownloadDataSource: AnyObject {
-    func execute(url: URL)
+    func execute(urls: [URL])
 }
 
 final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
-    func execute(url: URL) {
-        let configuration = BackgroundConfigurationGenerator.generate(identifier: UUID().uuidString)
+
+    let localFileDataSource: LocalFileDataSource
+
+    init(localFileDataSource: LocalFileDataSource) {
+        self.localFileDataSource = localFileDataSource
+    }
+
+    func execute(urls: [URL]) {
+        let sessionIdentifier = UUID().uuidString
+        let configuration = BackgroundConfigurationGenerator.generate(identifier: sessionIdentifier)
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: .main)
-        let backgroundTask = session.downloadTask(with: url)
-        backgroundTask.earliestBeginDate = Date().addingTimeInterval(10)
-        backgroundTask.countOfBytesClientExpectsToSend = 200
-        backgroundTask.countOfBytesClientExpectsToReceive = 500 * 1024
-        backgroundTask.resume()
+
+        let tuple: [(context: DownloadContext, downloadTask: URLSessionDownloadTask)] = urls.map {
+            let downloadTask = session.downloadTask(with: $0)
+            downloadTask.earliestBeginDate = Date().addingTimeInterval(5)
+            downloadTask.countOfBytesClientExpectsToSend = 250
+            downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
+
+            let destinationUrl = localFileDataSource.downloadDataDirectory.appendingPathComponent($0.lastPathComponent)
+            let downloadContext = DownloadContext(sessionId: sessionIdentifier, taskId: downloadTask.taskIdentifier, filePath: destinationUrl.path)
+            return (context: downloadContext, downloadTask: downloadTask)
+        }
+        DownloadGroupStore.shared.addTargetContexts(downloadContexts: tuple.map { $0.context })
+        tuple.forEach {
+            $0.downloadTask.resume()
+        }
     }
 }
 
@@ -37,7 +54,8 @@ extension DownloadDataSourceImpl: URLSessionDelegate {
     }
 
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        NotificationCenter.default.post(name: NotificationNames.downloadCompleted, object: nil)
+        log("urlSessionDidFinishEvents")
+        NotificationCenter.default.post(name: .downloadCompleted, object: nil)
     }
 }
 
@@ -46,37 +64,19 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         log("didFinishDownloadingTo", location)
 
-#if DEBUG
-        // write to files.
-        do {
-            let reader = try FileHandle(forReadingFrom: location)
-            let data = reader.readDataToEndOfFile()
-
-            let salt = try! DataCipher.AES.generateRandomSalt()
-            let iv = try! DataCipher.AES.generateRandomIv()
-            UserDefaults.standard.set(salt, forKey: "demo_salt")
-            UserDefaults.standard.set(iv, forKey: "demo_iv")
-
-            let localFileDataSource = LocalFileDataSourceProvider.provide()
-            let encryptFileContext = EncryptFileContext(
-                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("encrypted.png").path,
-                encryptContext: .init(plainData: data, salt: salt, iv: iv)
-            )
-            localFileDataSource.writeFile(
-                encryptFileContext: encryptFileContext,
-                password: "dd6yt-2aVstJ62absbPuHe4s8aFhdtSM"
-            )
-            localFileDataSource.writeFile(
-                data: data,
-                filePath: localFileDataSource.downloadDataDirectory.appendingPathComponent("plain.png").path
-            )
-
-        } catch {
-            log(error)
+        guard let downloadContext = DownloadGroupStore.shared.specificDownloadContext(
+            sessionId: session.configuration.identifier,
+            taskId: downloadTask.taskIdentifier
+        ) else {
+            return
         }
-#endif
+        DownloadGroupStore.shared.addFinishedContext(downloadContext: downloadContext)
+
+        log("PROGRESS", DownloadGroupStore.shared.progress)
+        localFileDataSource.writeFile(downloadContext: downloadContext, from: location)
     }
 
+    // Called only in foreground.
     func urlSession(
         _ session: URLSession,
         downloadTask: URLSessionDownloadTask,
@@ -84,7 +84,14 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
         totalBytesWritten: Int64,
         totalBytesExpectedToWrite: Int64
     ) {
+        guard let downloadContext = DownloadGroupStore.shared.specificDownloadContext(
+            sessionId: session.configuration.identifier,
+            taskId: downloadTask.taskIdentifier
+        ) else {
+            return
+        }
         let percentDownloaded = totalBytesWritten / totalBytesExpectedToWrite
+        log("downloadContext", downloadContext)
         log("totalBytesWritten", totalBytesWritten, "totalBytesExpectedToWrite", totalBytesExpectedToWrite, "percentDownloaded", percentDownloaded)
     }
 }

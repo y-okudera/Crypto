@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */; };
 		B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */; };
-		B6171B17274D4B7500D19351 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NotificationNames.swift */; };
+		B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NSNotificationName+.swift */; };
 		B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF2273FFA300060CF4A /* AppDelegate.swift */; };
 		B65B3DF5273FFA300060CF4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */; };
 		B65B3DF7273FFA300060CF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF6273FFA300060CF4A /* ViewController.swift */; };
@@ -28,7 +28,9 @@
 		B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* DataCipher.swift */; };
 		B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */; };
 		B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9E27403A2C0060CF4A /* Logger.swift */; };
-		B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */; };
+		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
+		FC34BCB3275092C90009A168 /* DownloadGroupContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */; };
+		FC34BCB527509E910009A168 /* DownloadGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB427509E910009A168 /* DownloadGroupStore.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
 		FC456788274FF57400E591B5 /* EncryptFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456787274FF57400E591B5 /* EncryptFileContext.swift */; };
 		FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456789274FF8F200E591B5 /* DecryptContext.swift */; };
@@ -90,7 +92,7 @@
 /* Begin PBXFileReference section */
 		B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurationGenerator.swift; sourceTree = "<group>"; };
 		B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSource.swift; sourceTree = "<group>"; };
-		B6171B16274D4B7500D19351 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		B6171B16274D4B7500D19351 /* NSNotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+.swift"; sourceTree = "<group>"; };
 		B65B3DEF273FFA300060CF4A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B3DF2273FFA300060CF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +114,9 @@
 		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
 		B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileDataSource.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoFileContext.swift; sourceTree = "<group>"; };
+		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
+		FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadGroupContext.swift; sourceTree = "<group>"; };
+		FC34BCB427509E910009A168 /* DownloadGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadGroupStore.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
 		FC456787274FF57400E591B5 /* EncryptFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptFileContext.swift; sourceTree = "<group>"; };
 		FC456789274FF8F200E591B5 /* DecryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptContext.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 			children = (
 				B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */,
 				B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */,
+				FC34BCB427509E910009A168 /* DownloadGroupStore.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 		B65B3E9727401F0A0060CF4A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FC9F7CD227531F7400E88383 /* Extension */,
 				B65B3E9827401F110060CF4A /* DataCipher */,
 				B65B3E9D27403A200060CF4A /* Logger */,
 			);
@@ -297,6 +303,7 @@
 		B65B3EA2274114760060CF4A /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				FC34BCAF2750737E0009A168 /* Remote */,
 				B65B3EA3274114890060CF4A /* Local */,
 			);
 			path = Entity;
@@ -305,14 +312,29 @@
 		B65B3EA3274114890060CF4A /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3EA4274114CD0060CF4A /* CryptoFileContext.swift */,
 				FC456789274FF8F200E591B5 /* DecryptContext.swift */,
 				FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */,
 				FC456785274FF4AD00E591B5 /* EncryptContext.swift */,
 				FC456787274FF57400E591B5 /* EncryptFileContext.swift */,
-				B6171B16274D4B7500D19351 /* NotificationNames.swift */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		FC34BCAF2750737E0009A168 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				FC34BCB0275092C00009A168 /* DownloadContext.swift */,
+				FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		FC9F7CD227531F7400E88383 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B6171B16274D4B7500D19351 /* NSNotificationName+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,15 +571,17 @@
 				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
+				FC34BCB3275092C90009A168 /* DownloadGroupContext.swift in Sources */,
+				FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */,
 				FC456788274FF57400E591B5 /* EncryptFileContext.swift in Sources */,
 				B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */,
 				B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */,
 				FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */,
+				FC34BCB527509E910009A168 /* DownloadGroupStore.swift in Sources */,
 				FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */,
 				B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */,
-				B6171B17274D4B7500D19351 /* NotificationNames.swift in Sources */,
+				B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
-				B65B3EA5274114CD0060CF4A /* CryptoFileContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
