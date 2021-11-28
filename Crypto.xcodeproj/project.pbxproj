@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */; };
+		B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */; };
 		B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */; };
 		B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NSNotificationName+.swift */; };
 		B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF2273FFA300060CF4A /* AppDelegate.swift */; };
@@ -28,11 +28,19 @@
 		B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* DataCipher.swift */; };
 		B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */; };
 		B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9E27403A2C0060CF4A /* Logger.swift */; };
+		B66585E427532BCF0019E845 /* RealmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66585E327532BCF0019E845 /* RealmDataStore.swift */; };
+		B66585F6275335120019E845 /* RealmConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66585F5275335120019E845 /* RealmConfigurator.swift */; };
+		B66585F927533D8E0019E845 /* ExceptionCatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66585F827533D8E0019E845 /* ExceptionCatchable.swift */; };
+		B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B66585FD27533DD00019E845 /* ExceptionHandler.m */; };
+		B6658601275342250019E845 /* ExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = B66585FC27533DD00019E845 /* ExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B665860A27534B1C0019E845 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B665860827534B1C0019E845 /* Realm.xcframework */; };
+		B665860B27534B1C0019E845 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B665860827534B1C0019E845 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B665860C27534B1C0019E845 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; };
+		B665860D27534B1C0019E845 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */; };
 		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
-		FC34BCB3275092C90009A168 /* DownloadGroupContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */; };
-		FC34BCB527509E910009A168 /* DownloadGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB427509E910009A168 /* DownloadGroupStore.swift */; };
+		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
-		FC456788274FF57400E591B5 /* EncryptFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456787274FF57400E591B5 /* EncryptFileContext.swift */; };
 		FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456789274FF8F200E591B5 /* DecryptContext.swift */; };
 		FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */; };
 /* End PBXBuildFile section */
@@ -87,10 +95,22 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B665860E27534B1C0019E845 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B665860B27534B1C0019E845 /* Realm.xcframework in Embed Frameworks */,
+				B665860D27534B1C0019E845 /* RealmSwift.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurationGenerator.swift; sourceTree = "<group>"; };
+		B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurator.swift; sourceTree = "<group>"; };
 		B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSource.swift; sourceTree = "<group>"; };
 		B6171B16274D4B7500D19351 /* NSNotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+.swift"; sourceTree = "<group>"; };
 		B65B3DEF273FFA300060CF4A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,11 +134,20 @@
 		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
 		B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileDataSource.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B66585D427532A5E0019E845 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		B66585D527532A5E0019E845 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		B66585E327532BCF0019E845 /* RealmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStore.swift; sourceTree = "<group>"; };
+		B66585E527532D710019E845 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Static/Realm.framework; sourceTree = "<group>"; };
+		B66585F5275335120019E845 /* RealmConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmConfigurator.swift; sourceTree = "<group>"; };
+		B66585F827533D8E0019E845 /* ExceptionCatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionCatchable.swift; sourceTree = "<group>"; };
+		B66585FC27533DD00019E845 /* ExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionHandler.h; sourceTree = "<group>"; };
+		B66585FD27533DD00019E845 /* ExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExceptionHandler.m; sourceTree = "<group>"; };
+		B665860827534B1C0019E845 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
+		B665860927534B1C0019E845 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContext.swift; sourceTree = "<group>"; };
 		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
-		FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadGroupContext.swift; sourceTree = "<group>"; };
-		FC34BCB427509E910009A168 /* DownloadGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadGroupStore.swift; sourceTree = "<group>"; };
+		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
-		FC456787274FF57400E591B5 /* EncryptFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptFileContext.swift; sourceTree = "<group>"; };
 		FC456789274FF8F200E591B5 /* DecryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptContext.swift; sourceTree = "<group>"; };
 		FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptFileContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B665860A27534B1C0019E845 /* Realm.xcframework in Frameworks */,
+				B665860C27534B1C0019E845 /* RealmSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +204,7 @@
 				B65B3E7727401EB70060CF4A /* DataSource */,
 				B65B3E8527401EB70060CF4A /* DataSourceTests */,
 				B65B3DF0273FFA300060CF4A /* Products */,
+				B66585D327532A5E0019E845 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,7 +282,8 @@
 		B65B3E9427401EDC0060CF4A /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */,
+				B66586112753D0490019E845 /* File */,
+				B66585E227532B590019E845 /* Realm */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -258,9 +291,7 @@
 		B65B3E9527401EE60060CF4A /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				B6171B12274CF80D00D19351 /* BackgroundConfigurationGenerator.swift */,
-				B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */,
-				FC34BCB427509E910009A168 /* DownloadGroupStore.swift */,
+				B66585E027532B300019E845 /* FileDownload */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -268,8 +299,8 @@
 		B65B3E9627401EF00060CF4A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E7827401EB70060CF4A /* DataSource.h */,
 				B65B3E7927401EB70060CF4A /* DataSource.docc */,
+				B65B3E7827401EB70060CF4A /* DataSource.h */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -277,8 +308,9 @@
 		B65B3E9727401F0A0060CF4A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				FC9F7CD227531F7400E88383 /* Extension */,
 				B65B3E9827401F110060CF4A /* DataCipher */,
+				B66585F727533D830019E845 /* ExceptionHandler */,
+				FC9F7CD227531F7400E88383 /* Extension */,
 				B65B3E9D27403A200060CF4A /* Logger */,
 			);
 			path = Utility;
@@ -303,7 +335,6 @@
 		B65B3EA2274114760060CF4A /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				FC34BCAF2750737E0009A168 /* Remote */,
 				B65B3EA3274114890060CF4A /* Local */,
 			);
 			path = Entity;
@@ -312,21 +343,70 @@
 		B65B3EA3274114890060CF4A /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				B66585E127532B420019E845 /* FileDownload */,
 				FC456789274FF8F200E591B5 /* DecryptContext.swift */,
 				FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */,
 				FC456785274FF4AD00E591B5 /* EncryptContext.swift */,
-				FC456787274FF57400E591B5 /* EncryptFileContext.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
 		};
-		FC34BCAF2750737E0009A168 /* Remote */ = {
+		B66585D327532A5E0019E845 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B665860827534B1C0019E845 /* Realm.xcframework */,
+				B665860927534B1C0019E845 /* RealmSwift.xcframework */,
+				B66585D527532A5E0019E845 /* Realm.framework */,
+				B66585E527532D710019E845 /* Realm.framework */,
+				B66585D427532A5E0019E845 /* RealmSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B66585E027532B300019E845 /* FileDownload */ = {
+			isa = PBXGroup;
+			children = (
+				B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */,
+				B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */,
+			);
+			path = FileDownload;
+			sourceTree = "<group>";
+		};
+		B66585E127532B420019E845 /* FileDownload */ = {
 			isa = PBXGroup;
 			children = (
 				FC34BCB0275092C00009A168 /* DownloadContext.swift */,
-				FC34BCB2275092C90009A168 /* DownloadGroupContext.swift */,
+				FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */,
+				B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */,
 			);
-			path = Remote;
+			path = FileDownload;
+			sourceTree = "<group>";
+		};
+		B66585E227532B590019E845 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				B66585E327532BCF0019E845 /* RealmDataStore.swift */,
+				B66585F5275335120019E845 /* RealmConfigurator.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		B66585F727533D830019E845 /* ExceptionHandler */ = {
+			isa = PBXGroup;
+			children = (
+				B66585F827533D8E0019E845 /* ExceptionCatchable.swift */,
+				B66585FC27533DD00019E845 /* ExceptionHandler.h */,
+				B66585FD27533DD00019E845 /* ExceptionHandler.m */,
+			);
+			path = ExceptionHandler;
+			sourceTree = "<group>";
+		};
+		B66586112753D0490019E845 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				B65B3E9B274039420060CF4A /* LocalFileDataSource.swift */,
+			);
+			path = File;
 			sourceTree = "<group>";
 		};
 		FC9F7CD227531F7400E88383 /* Extension */ = {
@@ -345,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B65B3E8827401EB70060CF4A /* DataSource.h in Headers */,
+				B6658601275342250019E845 /* ExceptionHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +495,7 @@
 				B65B3E7227401EB70060CF4A /* Sources */,
 				B65B3E7327401EB70060CF4A /* Frameworks */,
 				B65B3E7427401EB70060CF4A /* Resources */,
+				B665860E27534B1C0019E845 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -466,6 +548,7 @@
 					};
 					B65B3E7527401EB70060CF4A = {
 						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
 					};
 					B65B3E7E27401EB70060CF4A = {
 						CreatedOnToolsVersion = 13.0;
@@ -570,16 +653,19 @@
 			files = (
 				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
+				B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
-				FC34BCB3275092C90009A168 /* DownloadGroupContext.swift in Sources */,
+				B66585F927533D8E0019E845 /* ExceptionCatchable.swift in Sources */,
+				FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */,
 				FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */,
-				FC456788274FF57400E591B5 /* EncryptFileContext.swift in Sources */,
+				B66585F6275335120019E845 /* RealmConfigurator.swift in Sources */,
 				B65B3E9C274039420060CF4A /* LocalFileDataSource.swift in Sources */,
 				B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */,
+				B66585E427532BCF0019E845 /* RealmDataStore.swift in Sources */,
 				FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */,
-				FC34BCB527509E910009A168 /* DownloadGroupStore.swift in Sources */,
 				FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */,
-				B6171B13274CF80D00D19351 /* BackgroundConfigurationGenerator.swift in Sources */,
+				B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */,
+				B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */,
 				B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
 			);
@@ -768,6 +854,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8PR34D6DP;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Crypto/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -785,6 +876,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 			};
 			name = Debug;
 		};
@@ -797,6 +889,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8PR34D6DP;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Crypto/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -814,6 +911,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 			};
 			name = Release;
 		};
@@ -916,6 +1014,7 @@
 		B65B3E8E27401EB70060CF4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -923,6 +1022,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -937,8 +1042,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -947,6 +1054,7 @@
 		B65B3E8F27401EB70060CF4A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -954,6 +1062,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -970,6 +1084,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

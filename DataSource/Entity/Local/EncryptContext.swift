@@ -17,14 +17,4 @@ public struct EncryptContext {
         self.salt = salt
         self.iv = iv
     }
-
-    init(plainData: Data) throws {
-        do {
-            let salt = try DataCipher.AES.generateRandomSalt()
-            let iv = try DataCipher.AES.generateRandomIv()
-            self.init(plainData: plainData, salt: salt, iv: iv)
-        } catch {
-            throw error
-        }
-    }
 }

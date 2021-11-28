@@ -43,7 +43,9 @@ class ViewController: UIViewController {
             URL(string: "https://placehold.jp/24/cc9999/993333/150x160.png")!,
             URL(string: "https://placehold.jp/24/cc9999/993333/150x170.png")!,
         ]
-        downloadDataSource.execute(urls: urls)
+        downloadDataSource.execute(contentId: 0, urls: urls)
+        downloadDataSource.execute(contentId: 1, urls: urls)
+        downloadDataSource.execute(contentId: 2, urls: urls)
     }
 
     @objc
@@ -60,6 +62,6 @@ class ViewController: UIViewController {
             URL(string: "https://placehold.jp/24/cc9999/993333/150x160.png")!,
             URL(string: "https://placehold.jp/24/cc9999/993333/150x170.png")!,
         ]
-        downloadDataSource.execute(urls: urls)
+        downloadDataSource.execute(contentId: 100, urls: urls)
     }
 }
