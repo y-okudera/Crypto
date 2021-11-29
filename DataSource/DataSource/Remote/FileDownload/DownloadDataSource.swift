@@ -12,7 +12,9 @@ public enum DownloadDataSourceProvider {
         return DownloadDataSourceImpl(
             backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
             localFileDataSource: LocalFileDataSourceProvider.provide(),
-            realmDataStore: RealmDataStoreProvider.provide()
+            downloadSessionContextRepository: DownloadSessionContextRepositoryProvider.provide(),
+            downloadContextRepository: DownloadContextRepositoryProvider.provide(),
+            encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide()
         )
     }
 }
@@ -25,12 +27,22 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
     let backgroundConfigurator: BackgroundConfigurator
     let localFileDataSource: LocalFileDataSource
-    let realmDataStore: RealmDataStore
+    let downloadSessionContextRepository: DownloadSessionContextRepository
+    let downloadContextRepository: DownloadContextRepository
+    let encryptedFileContextRepository: EncryptedFileContextRepository
 
-    init(backgroundConfigurator: BackgroundConfigurator, localFileDataSource: LocalFileDataSource, realmDataStore: RealmDataStore) {
+    init(
+        backgroundConfigurator: BackgroundConfigurator,
+        localFileDataSource: LocalFileDataSource,
+        downloadSessionContextRepository: DownloadSessionContextRepository,
+        downloadContextRepository: DownloadContextRepository,
+        encryptedFileContextRepository: EncryptedFileContextRepository
+    ) {
         self.backgroundConfigurator = backgroundConfigurator
         self.localFileDataSource = localFileDataSource
-        self.realmDataStore = realmDataStore
+        self.downloadSessionContextRepository = downloadSessionContextRepository
+        self.downloadContextRepository = downloadContextRepository
+        self.encryptedFileContextRepository = encryptedFileContextRepository
     }
 
     func execute(contentId: Int, urls: [URL]) {
@@ -57,7 +69,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
             tuple.append((context: downloadContext, downloadTask: downloadTask))
         }
 
-        updateDownloadSessionContext(sessionId: sessionIdentifier, contentId: contentId, downloadContexts: tuple.map { $0.context })
+        downloadSessionContextRepository.update(sessionId: sessionIdentifier, contentId: contentId, downloadContexts: tuple.map { $0.context })
 
         tuple.forEach {
             $0.downloadTask.resume()
@@ -84,7 +96,7 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
 
         guard
             let sessionId = session.configuration.identifier,
-            let downloadSessionContext = readDownloadSessionContext(sessionId: sessionId),
+            let downloadSessionContext = downloadSessionContextRepository.read(sessionId: sessionId),
             let downloadContext = downloadSessionContext.downloadContexts.filter({ $0.taskId == downloadTask.taskIdentifier }).first else {
                 return
             }
@@ -101,8 +113,11 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
                 from: location
             )
 
-            updateDownloadContext(downloadContext: downloadContext)
-            addEncryptedFileContext(
+            downloadContextRepository.update(downloadContext: downloadContext) {
+                downloadContext.isDownloaded = true
+            }
+
+            encryptedFileContextRepository.update(
                 filePath: downloadContext.filePath,
                 contentId: downloadSessionContext.contentId,
                 index: downloadContext.index,
@@ -132,44 +147,5 @@ extension DownloadDataSourceImpl: URLSessionTaskDelegate {
             return
         }
         log("didComplete")
-    }
-}
-
-extension DownloadDataSourceImpl {
-
-    /// Write to database
-    private func updateDownloadSessionContext(sessionId: String, contentId: Int, downloadContexts: [DownloadContext]) {
-        let downloadSessionContext = DownloadSessionContext(sessionId: sessionId, contentId: contentId, downloadContexts: downloadContexts)
-        do {
-            try realmDataStore.update(object: downloadSessionContext, block: nil)
-        } catch {
-            fatalError("Realm writing failed.")
-        }
-    }
-
-    /// Read from database
-    private func readDownloadSessionContext(sessionId: String) -> DownloadSessionContext? {
-        return realmDataStore.findById(id: sessionId, for: DownloadSessionContext.self) as? DownloadSessionContext
-    }
-
-    /// Write to database
-    private func updateDownloadContext(downloadContext: DownloadContext) {
-        do {
-            try realmDataStore.update(object: downloadContext, block: {
-                downloadContext.isDownloaded = true
-            })
-        } catch {
-            fatalError("Realm writing failed.")
-        }
-    }
-
-    /// Write to database
-    private func addEncryptedFileContext(filePath: String, contentId: Int, index: Int, salt: Data, iv: Data) {
-        let encryptedFileContext = EncryptedFileContext(filePath: filePath, contentId: contentId, index: index, salt: salt, iv: iv)
-        do {
-            try realmDataStore.update(object: encryptedFileContext, block: nil)
-        } catch {
-            fatalError("Realm writing failed.")
-        }
     }
 }
