@@ -43,7 +43,7 @@ public protocol RealmDataStore {
     func delete(object: RealmSwift.Object) throws
 
     /// レコード削除
-    func delete(objects: Results<RealmSwift.Object>) throws
+    func delete(objects: [RealmSwift.Object]) throws
 
     /// 全件取得
     func findAll(for type: RealmSwift.Object.Type) -> Results<RealmSwift.Object>
@@ -57,15 +57,19 @@ public protocol RealmDataStore {
 
 final class RealmDataStoreImpl: RealmDataStore, ExceptionCatchable {
 
-    let realm: Realm
+    let realmConfigurator: RealmConfigurator
+
+    var realm: Realm {
+        do {
+            return try Realm(configuration: realmConfigurator.configuration)
+        } catch {
+            assertionFailure("Realm initialize failed.")
+            return try! Realm()
+        }
+    }
 
     init(realmConfigurator: RealmConfigurator) {
-        do {
-            self.realm = try Realm(configuration: realmConfigurator.configuration)
-        } catch {
-            self.realm = try! Realm()
-            fatalError("Realm initialize failed.")
-        }
+        self.realmConfigurator = realmConfigurator
     }
 
     // MARK: - Create a new primary key
@@ -154,7 +158,7 @@ final class RealmDataStoreImpl: RealmDataStore, ExceptionCatchable {
     }
 
     /// レコード削除
-    func delete(objects: Results<RealmSwift.Object>) throws {
+    func delete(objects: [RealmSwift.Object]) throws {
         let executionError = executionBlock(realm: realm) { [weak self] in
             self?.realm.delete(objects)
         }

@@ -14,7 +14,9 @@ public enum DownloadDataSourceProvider {
             localFileDataSource: LocalFileDataSourceProvider.provide(),
             downloadSessionContextRepository: DownloadSessionContextRepositoryProvider.provide(),
             downloadContextRepository: DownloadContextRepositoryProvider.provide(),
-            encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide()
+            encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide(),
+            semaphore: DispatchSemaphore(value: 0),
+            downloadQueue: DispatchQueue(label: "jp.yuoku.Crypto.Download", qos: .background)
         )
     }
 }
@@ -25,54 +27,76 @@ public protocol DownloadDataSource: AnyObject {
 
 final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
-    let backgroundConfigurator: BackgroundConfigurator
-    let localFileDataSource: LocalFileDataSource
-    let downloadSessionContextRepository: DownloadSessionContextRepository
-    let downloadContextRepository: DownloadContextRepository
-    let encryptedFileContextRepository: EncryptedFileContextRepository
+    private let backgroundConfigurator: BackgroundConfigurator
+    private let localFileDataSource: LocalFileDataSource
+    private let downloadSessionContextRepository: DownloadSessionContextRepository
+    private let downloadContextRepository: DownloadContextRepository
+    private let encryptedFileContextRepository: EncryptedFileContextRepository
+    private let semaphore: DispatchSemaphore
+    private let downloadQueue: DispatchQueue
 
     init(
         backgroundConfigurator: BackgroundConfigurator,
         localFileDataSource: LocalFileDataSource,
         downloadSessionContextRepository: DownloadSessionContextRepository,
         downloadContextRepository: DownloadContextRepository,
-        encryptedFileContextRepository: EncryptedFileContextRepository
+        encryptedFileContextRepository: EncryptedFileContextRepository,
+        semaphore: DispatchSemaphore,
+        downloadQueue: DispatchQueue
     ) {
         self.backgroundConfigurator = backgroundConfigurator
         self.localFileDataSource = localFileDataSource
         self.downloadSessionContextRepository = downloadSessionContextRepository
         self.downloadContextRepository = downloadContextRepository
         self.encryptedFileContextRepository = encryptedFileContextRepository
+        self.semaphore = semaphore
+        self.downloadQueue = downloadQueue
     }
 
     func execute(contentId: Int, urls: [URL]) {
-        let sessionIdentifier = UUID().uuidString
-        let configuration = backgroundConfigurator.configuration(identifier: sessionIdentifier)
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: .main)
+        downloadQueue.async { [weak self] in
+            guard let self = self else {
+                return
+            }
 
-        var tuple = [(context: DownloadContext, downloadTask: URLSessionDownloadTask)]()
-        for (index, url) in urls.enumerated() {
-            let downloadTask = session.downloadTask(with: url)
-            downloadTask.earliestBeginDate = Date().addingTimeInterval(5)
-            downloadTask.countOfBytesClientExpectsToSend = 250
-            downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
+            let sessionIdentifier = UUID().uuidString
+            log("START: \(sessionIdentifier)")
 
-            let destinationUrl = localFileDataSource.downloadDataDirectory
-                .appendingPathComponent("\(contentId)", isDirectory: true)
-                .appendingPathComponent(url.lastPathComponent)
-            let downloadContext = DownloadContext(
-                filePath: destinationUrl.path,
-                taskId: downloadTask.taskIdentifier,
-                index: index,
-                isDownloaded: false
+            let configuration = self.backgroundConfigurator.configuration(identifier: sessionIdentifier)
+            let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+
+            var tuple = [(context: DownloadContext, downloadTask: URLSessionDownloadTask)]()
+            for (index, url) in urls.enumerated() {
+                let downloadTask = session.downloadTask(with: url)
+                downloadTask.earliestBeginDate = Date().addingTimeInterval(5)
+                downloadTask.countOfBytesClientExpectsToSend = 250
+                downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
+
+                let destinationUrl = self.localFileDataSource.downloadDataDirectory
+                    .appendingPathComponent("\(contentId)", isDirectory: true)
+                    .appendingPathComponent(url.lastPathComponent)
+                let downloadContext = DownloadContext(
+                    filePath: destinationUrl.path,
+                    taskId: downloadTask.taskIdentifier,
+                    index: index,
+                    isDownloaded: false
+                )
+                tuple.append((context: downloadContext, downloadTask: downloadTask))
+            }
+
+            self.downloadSessionContextRepository.update(
+                sessionId: sessionIdentifier,
+                contentId: contentId,
+                downloadContexts: tuple.map { $0.context }
             )
-            tuple.append((context: downloadContext, downloadTask: downloadTask))
-        }
 
-        downloadSessionContextRepository.update(sessionId: sessionIdentifier, contentId: contentId, downloadContexts: tuple.map { $0.context })
+            tuple.forEach {
+                $0.downloadTask.resume()
+            }
 
-        tuple.forEach {
-            $0.downloadTask.resume()
+            log("Will wait: \(sessionIdentifier)")
+            self.semaphore.wait()
+            log("End: \(sessionIdentifier)")
         }
     }
 }
@@ -94,12 +118,11 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         log("didFinishDownloadingTo", location)
 
-        guard
-            let sessionId = session.configuration.identifier,
-            let downloadSessionContext = downloadSessionContextRepository.read(sessionId: sessionId),
-            let downloadContext = downloadSessionContext.downloadContexts.filter({ $0.taskId == downloadTask.taskIdentifier }).first else {
-                return
-            }
+        guard let sessionId = session.configuration.identifier,
+              let downloadSessionContext = downloadSessionContextRepository.read(sessionId: sessionId),
+              let downloadContext = downloadSessionContext.downloadContexts.filter({ $0.taskId == downloadTask.taskIdentifier }).first else {
+                  return
+              }
 
         do {
             let salt = try DataCipher.AES.generateRandomSalt()
@@ -144,8 +167,23 @@ extension DownloadDataSourceImpl: URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
             log("didCompleteWithError: \(String(describing: error))")
+            session.finishTasksAndInvalidate()
+            semaphore.signal()
             return
         }
-        log("didComplete")
+
+        guard let sessionId = session.configuration.identifier,
+              let downloadSessionContext = downloadSessionContextRepository.read(sessionId: sessionId) else {
+                  return
+              }
+        let allCount = Double(downloadSessionContext.downloadContexts.count)
+        let downloadedCount = Double(downloadSessionContext.downloadContexts.filter { $0.isDownloaded == true }.count)
+
+        if downloadedCount == allCount {
+            log("didComplete \(sessionId)")
+            session.finishTasksAndInvalidate()
+            downloadSessionContextRepository.delete(sessionId: sessionId)
+            semaphore.signal()
+        }
     }
 }

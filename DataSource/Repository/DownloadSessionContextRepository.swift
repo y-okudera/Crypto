@@ -17,6 +17,8 @@ public protocol DownloadSessionContextRepository {
     func update(sessionId: String, contentId: Int, downloadContexts: [DownloadContext])
 
     func read(sessionId: String) -> DownloadSessionContext?
+
+    func delete(sessionId: String)
 }
 
 final class DownloadSessionContextRepositoryImpl: DownloadSessionContextRepository {
@@ -38,5 +40,17 @@ final class DownloadSessionContextRepositoryImpl: DownloadSessionContextReposito
 
     func read(sessionId: String) -> DownloadSessionContext? {
         return realmDataStore.findById(id: sessionId, for: DownloadSessionContext.self) as? DownloadSessionContext
+    }
+
+    func delete(sessionId: String) {
+        guard let willDeleteDownloadSessionContext = read(sessionId: sessionId) else {
+            return
+        }
+        do {
+            try realmDataStore.delete(objects: Array(willDeleteDownloadSessionContext.downloadContexts))
+            try realmDataStore.delete(object: willDeleteDownloadSessionContext)
+        } catch {
+            fatalError("Realm writing failed.")
+        }
     }
 }
