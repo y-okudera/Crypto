@@ -7,13 +7,7 @@
 
 import Foundation
 
-public enum ApplicationContainerProvider {
-    public static func provide() -> ApplicationContainer {
-        return ApplicationContainerImpl()
-    }
-}
-
-public protocol ApplicationContainer {
+public protocol ApplicationContainerProviding {
 
     var downloadDataDirectory: URL { get }
 
@@ -39,7 +33,7 @@ public protocol ApplicationContainer {
     func readEncryptedData(filePath: String, salt: Data, iv: Data, password: String) -> Data?
 }
 
-final class ApplicationContainerImpl: ApplicationContainer {
+final class ApplicationContainer: ApplicationContainerProviding {
 
     // MARK: - Handle directory
 

@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var backgroundCompletionHandler: (() -> Void)?
 
+    @Injected(\.applicationContainerProvider)
+    private var applicationContainer: ApplicationContainerProviding
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
@@ -23,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(downloadCompleted), name: .downloadCompleted, object: nil)
 
         // ダウンロードファイルを保存するためのディレクトリを作成する
-        ApplicationContainerProvider.provide().createDownloadDataDirectory()
+        applicationContainer.createDownloadDataDirectory()
 
         return true
     }

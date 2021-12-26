@@ -11,7 +11,6 @@ public enum DownloadDataSourceProvider {
     public static func provide() -> DownloadDataSource {
         return DownloadDataSourceImpl(
             backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
-            applicationContainer: ApplicationContainerProvider.provide(),
             downloadSessionContextRepository: DownloadSessionContextRepositoryProvider.provide(),
             downloadContextRepository: DownloadContextRepositoryProvider.provide(),
             encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide(),
@@ -28,7 +27,10 @@ public protocol DownloadDataSource: AnyObject {
 final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
     private let backgroundConfigurator: BackgroundConfigurator
-    private let applicationContainer: ApplicationContainer
+
+    @Injected(\.applicationContainerProvider)
+    private var applicationContainer: ApplicationContainerProviding
+
     private let downloadSessionContextRepository: DownloadSessionContextRepository
     private let downloadContextRepository: DownloadContextRepository
     private let encryptedFileContextRepository: EncryptedFileContextRepository
@@ -37,7 +39,6 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
     init(
         backgroundConfigurator: BackgroundConfigurator,
-        applicationContainer: ApplicationContainer,
         downloadSessionContextRepository: DownloadSessionContextRepository,
         downloadContextRepository: DownloadContextRepository,
         encryptedFileContextRepository: EncryptedFileContextRepository,
@@ -45,7 +46,6 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
         downloadQueue: DispatchQueue
     ) {
         self.backgroundConfigurator = backgroundConfigurator
-        self.applicationContainer = applicationContainer
         self.downloadSessionContextRepository = downloadSessionContextRepository
         self.downloadContextRepository = downloadContextRepository
         self.encryptedFileContextRepository = encryptedFileContextRepository
