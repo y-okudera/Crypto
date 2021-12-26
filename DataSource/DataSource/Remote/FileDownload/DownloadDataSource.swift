@@ -68,10 +68,6 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
             var tuple = [(context: DownloadContext, downloadTask: URLSessionDownloadTask)]()
             for (index, url) in urls.enumerated() {
                 let downloadTask = session.downloadTask(with: url)
-                downloadTask.earliestBeginDate = Date().addingTimeInterval(5)
-                downloadTask.countOfBytesClientExpectsToSend = 250
-                downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
-
                 let destinationUrl = self.applicationContainer.downloadDataDirectory
                     .appendingPathComponent("\(contentId)", isDirectory: true)
                     .appendingPathComponent(url.lastPathComponent)
