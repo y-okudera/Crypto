@@ -45,7 +45,8 @@ public protocol RealmDataStoreProviding {
 
 final class RealmDataStore: RealmDataStoreProviding, ExceptionCatchable {
 
-    let realmConfigurator: RealmConfigurator
+    @Injected(\.realmConfiguratorProvider)
+    private var realmConfigurator: RealmConfiguratorProviding
 
     var realm: Realm {
         do {
@@ -54,10 +55,6 @@ final class RealmDataStore: RealmDataStoreProviding, ExceptionCatchable {
             assertionFailure("Realm initialize failed.")
             return try! Realm()
         }
-    }
-
-    init(realmConfigurator: RealmConfigurator) {
-        self.realmConfigurator = realmConfigurator
     }
 
     // MARK: - Create a new primary key

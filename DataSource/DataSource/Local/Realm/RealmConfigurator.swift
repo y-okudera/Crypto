@@ -7,17 +7,11 @@
 
 import RealmSwift
 
-public enum RealmConfiguratorProvider {
-    public static func provide(configuration: Realm.Configuration) -> RealmConfigurator {
-        return RealmConfiguratorImpl(configuration: configuration)
-    }
-}
-
-public protocol RealmConfigurator: AnyObject {
+public protocol RealmConfiguratorProviding {
     var configuration: Realm.Configuration { get }
 }
 
-final class RealmConfiguratorImpl: RealmConfigurator {
+final class RealmConfigurator: RealmConfiguratorProviding {
 
     let configuration: Realm.Configuration
 
