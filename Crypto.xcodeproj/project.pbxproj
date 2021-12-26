@@ -46,6 +46,7 @@
 		B665860C27534B1C0019E845 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; };
 		B665860D27534B1C0019E845 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */; };
+		B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */; };
 		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
 		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
@@ -161,6 +162,7 @@
 		B665860827534B1C0019E845 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		B665860927534B1C0019E845 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContext.swift; sourceTree = "<group>"; };
+		B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
 		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				B65A38C92778C087001B7F31 /* DataSource */,
+				B676006D2778CF8400319833 /* Repository */,
 			);
 			path = DependencyInjection;
 			sourceTree = "<group>";
@@ -497,6 +500,14 @@
 			path = File;
 			sourceTree = "<group>";
 		};
+		B676006D2778CF8400319833 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		FC9F7CD227531F7400E88383 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +755,7 @@
 				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
 				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
+				B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */,
 				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
 				B65A38D02778CAFE001B7F31 /* RealmDataStoreProviderKey.swift in Sources */,
 				B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */,
