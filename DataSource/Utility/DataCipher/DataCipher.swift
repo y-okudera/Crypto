@@ -7,9 +7,9 @@
 
 import CommonCrypto
 
-public enum DataCipher {
+enum DataCipher {
 
-    public enum CryptoOperationType: Equatable {
+    enum CryptoOperationType: Equatable {
         case decrypt
         case encrypt
     }
@@ -17,9 +17,9 @@ public enum DataCipher {
 
 extension DataCipher {
 
-    public enum AES {
+    enum AES {
 
-        public enum Error: Swift.Error {
+        enum Error: Swift.Error {
             case secRandomCopyBytesFailed(status: Int)
             case keyGenerationFailed(status: Int)
             case encodingFailed
@@ -28,11 +28,11 @@ extension DataCipher {
             case cryptoFailed(status: CCCryptorStatus)
         }
 
-        public static func generateRandomIv() throws -> Data {
+        static func generateRandomIv() throws -> Data {
             return try generateRandom(byteLength: kCCBlockSizeAES128)
         }
 
-        public static func generateRandomSalt() throws -> Data {
+        static func generateRandomSalt() throws -> Data {
             let saltSize = 20
             return try generateRandom(byteLength: saltSize)
         }
@@ -42,7 +42,7 @@ extension DataCipher {
         ///   - encryptContext: コンテキスト
         ///   - password: 共通パスワード
         /// - Returns: 暗号化されたデータ
-        public static func encrypt(encryptContext: EncryptContext, password: String) throws -> Data {
+        static func encrypt(encryptContext: EncryptContext, password: String) throws -> Data {
             return try crypto(
                 operation: .encrypt,
                 sourceData: encryptContext.plainData,
@@ -57,7 +57,7 @@ extension DataCipher {
         ///   - decryptContext: コンテキスト
         ///   - password: 共通パスワード
         /// - Returns: 復号されたデータ
-        public static func decrypt(decryptContext: DecryptContext, password: String) throws -> Data {
+        static func decrypt(decryptContext: DecryptContext, password: String) throws -> Data {
             return try crypto(
                 operation: .decrypt,
                 sourceData: decryptContext.encryptedData,

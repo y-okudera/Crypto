@@ -12,7 +12,7 @@ private struct EncryptedFileContextRepositoryProviderKey: InjectionKey {
 }
 
 extension InjectedValues {
-    public var encryptedFileContextRepositoryProvider: EncryptedFileContextRepositoryProviding {
+    var encryptedFileContextRepositoryProvider: EncryptedFileContextRepositoryProviding {
         get { Self[EncryptedFileContextRepositoryProviderKey.self] }
         set { Self[EncryptedFileContextRepositoryProviderKey.self] = newValue }
     }

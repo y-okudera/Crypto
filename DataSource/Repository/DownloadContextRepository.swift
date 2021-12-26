@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol DownloadContextRepositoryProviding {
+protocol DownloadContextRepositoryProviding {
     func update(downloadContext: DownloadContext, updateBlock: @escaping(() -> Void))
 }
 

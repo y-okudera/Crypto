@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol DownloadSessionContextRepositoryProviding {
+protocol DownloadSessionContextRepositoryProviding {
     func update(sessionId: String, contentId: Int, downloadContexts: [DownloadContext])
 
     func read(sessionId: String) -> DownloadSessionContext?

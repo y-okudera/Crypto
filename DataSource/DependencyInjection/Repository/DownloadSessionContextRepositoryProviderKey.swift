@@ -12,7 +12,7 @@ private struct DownloadSessionContextRepositoryProviderKey: InjectionKey {
 }
 
 extension InjectedValues {
-    public var downloadSessionContextRepositoryProvider: DownloadSessionContextRepositoryProviding {
+    var downloadSessionContextRepositoryProvider: DownloadSessionContextRepositoryProviding {
         get { Self[DownloadSessionContextRepositoryProviderKey.self] }
         set { Self[DownloadSessionContextRepositoryProviderKey.self] = newValue }
     }

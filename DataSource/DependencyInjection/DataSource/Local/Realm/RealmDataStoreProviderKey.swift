@@ -12,7 +12,7 @@ private struct RealmDataStoreProviderKey: InjectionKey {
 }
 
 extension InjectedValues {
-    public var realmDataStoreProvider: RealmDataStoreProviding {
+    var realmDataStoreProvider: RealmDataStoreProviding {
         get { Self[RealmDataStoreProviderKey.self] }
         set { Self[RealmDataStoreProviderKey.self] = newValue }
     }

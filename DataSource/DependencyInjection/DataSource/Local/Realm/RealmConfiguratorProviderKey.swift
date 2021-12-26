@@ -19,7 +19,7 @@ private struct RealmConfiguratorProviderKey: InjectionKey {
 }
 
 extension InjectedValues {
-    public var realmConfiguratorProvider: RealmConfiguratorProviding {
+    var realmConfiguratorProvider: RealmConfiguratorProviding {
         get { Self[RealmConfiguratorProviderKey.self] }
         set { Self[RealmConfiguratorProviderKey.self] = newValue }
     }

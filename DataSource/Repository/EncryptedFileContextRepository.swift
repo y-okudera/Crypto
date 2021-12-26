@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol EncryptedFileContextRepositoryProviding {
+protocol EncryptedFileContextRepositoryProviding {
     func update(filePath: String, contentId: Int, index: Int, salt: Data, iv: Data)
 }
 

@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-public protocol RealmDataStoreProviding {
+protocol RealmDataStoreProviding {
 
     var realm: Realm { get }
 

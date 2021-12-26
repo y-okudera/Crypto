@@ -37,7 +37,7 @@ final class ApplicationContainer: ApplicationContainerProviding {
 
     // MARK: - Handle directory
 
-    public var downloadDataDirectory: URL {
+    var downloadDataDirectory: URL {
         let libraryDirectory = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         return libraryDirectory.appendingPathComponent("DownloadData", isDirectory: true)
     }

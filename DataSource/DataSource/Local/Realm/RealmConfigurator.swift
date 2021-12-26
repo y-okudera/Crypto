@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-public protocol RealmConfiguratorProviding {
+protocol RealmConfiguratorProviding {
     var configuration: Realm.Configuration { get }
 }
 
