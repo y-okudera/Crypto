@@ -11,7 +11,6 @@ public enum DownloadDataSourceProvider {
     public static func provide() -> DownloadDataSource {
         return DownloadDataSourceImpl(
             backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
-            encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide(),
             semaphore: DispatchSemaphore(value: 0),
             downloadQueue: DispatchQueue(label: "jp.yuoku.Crypto.Download", qos: .background)
         )
@@ -35,18 +34,18 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
     @Injected(\.downloadContextRepositoryProvider)
     private var downloadContextRepository: DownloadContextRepositoryProviding
 
-    private let encryptedFileContextRepository: EncryptedFileContextRepository
+    @Injected(\.encryptedFileContextRepositoryProvider)
+    private var encryptedFileContextRepository: EncryptedFileContextRepositoryProviding
+
     private let semaphore: DispatchSemaphore
     private let downloadQueue: DispatchQueue
 
     init(
         backgroundConfigurator: BackgroundConfigurator,
-        encryptedFileContextRepository: EncryptedFileContextRepository,
         semaphore: DispatchSemaphore,
         downloadQueue: DispatchQueue
     ) {
         self.backgroundConfigurator = backgroundConfigurator
-        self.encryptedFileContextRepository = encryptedFileContextRepository
         self.semaphore = semaphore
         self.downloadQueue = downloadQueue
     }

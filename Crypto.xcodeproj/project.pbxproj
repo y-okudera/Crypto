@@ -48,6 +48,7 @@
 		B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */; };
 		B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */; };
 		B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */; };
+		B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */; };
 		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
 		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
@@ -165,6 +166,7 @@
 		B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContext.swift; sourceTree = "<group>"; };
 		B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
+		B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
 		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			children = (
 				B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */,
 				B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */,
+				B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
 				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
+				B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */,
 				B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */,
 				B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */,
 				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
