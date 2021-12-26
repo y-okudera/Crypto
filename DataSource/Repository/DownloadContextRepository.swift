@@ -7,17 +7,11 @@
 
 import Foundation
 
-public enum DownloadContextRepositoryProvider {
-    public static func provide() -> DownloadContextRepository {
-        return DownloadContextRepositoryImpl()
-    }
-}
-
-public protocol DownloadContextRepository {
+public protocol DownloadContextRepositoryProviding {
     func update(downloadContext: DownloadContext, updateBlock: @escaping(() -> Void))
 }
 
-final class DownloadContextRepositoryImpl: DownloadContextRepository {
+final class DownloadContextRepository: DownloadContextRepositoryProviding {
 
     @Injected(\.realmDataStoreProvider)
     private var realmDataStore: RealmDataStoreProviding
