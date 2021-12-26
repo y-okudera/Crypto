@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }()
 
     let downloadDataSource = DownloadDataSourceProvider.provide()
-    let localFileDataSource = LocalFileDataSourceProvider.provide()
 
     override func viewDidLoad() {
         super.viewDidLoad()

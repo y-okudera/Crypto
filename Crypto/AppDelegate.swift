@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(downloadCompleted), name: .downloadCompleted, object: nil)
 
         // ダウンロードファイルを保存するためのディレクトリを作成する
-        LocalFileDataSourceProvider.provide().createDownloadDataDirectory()
+        ApplicationContainerProvider.provide().createDownloadDataDirectory()
 
         return true
     }

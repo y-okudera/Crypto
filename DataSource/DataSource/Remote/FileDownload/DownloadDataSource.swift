@@ -11,7 +11,7 @@ public enum DownloadDataSourceProvider {
     public static func provide() -> DownloadDataSource {
         return DownloadDataSourceImpl(
             backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
-            localFileDataSource: LocalFileDataSourceProvider.provide(),
+            applicationContainer: ApplicationContainerProvider.provide(),
             downloadSessionContextRepository: DownloadSessionContextRepositoryProvider.provide(),
             downloadContextRepository: DownloadContextRepositoryProvider.provide(),
             encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide(),
@@ -28,7 +28,7 @@ public protocol DownloadDataSource: AnyObject {
 final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
     private let backgroundConfigurator: BackgroundConfigurator
-    private let localFileDataSource: LocalFileDataSource
+    private let applicationContainer: ApplicationContainer
     private let downloadSessionContextRepository: DownloadSessionContextRepository
     private let downloadContextRepository: DownloadContextRepository
     private let encryptedFileContextRepository: EncryptedFileContextRepository
@@ -37,7 +37,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
     init(
         backgroundConfigurator: BackgroundConfigurator,
-        localFileDataSource: LocalFileDataSource,
+        applicationContainer: ApplicationContainer,
         downloadSessionContextRepository: DownloadSessionContextRepository,
         downloadContextRepository: DownloadContextRepository,
         encryptedFileContextRepository: EncryptedFileContextRepository,
@@ -45,7 +45,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
         downloadQueue: DispatchQueue
     ) {
         self.backgroundConfigurator = backgroundConfigurator
-        self.localFileDataSource = localFileDataSource
+        self.applicationContainer = applicationContainer
         self.downloadSessionContextRepository = downloadSessionContextRepository
         self.downloadContextRepository = downloadContextRepository
         self.encryptedFileContextRepository = encryptedFileContextRepository
@@ -72,7 +72,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
                 downloadTask.countOfBytesClientExpectsToSend = 250
                 downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
 
-                let destinationUrl = self.localFileDataSource.downloadDataDirectory
+                let destinationUrl = self.applicationContainer.downloadDataDirectory
                     .appendingPathComponent("\(contentId)", isDirectory: true)
                     .appendingPathComponent(url.lastPathComponent)
                 let downloadContext = DownloadContext(
@@ -128,7 +128,7 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
             let salt = try DataCipher.AES.generateRandomSalt()
             let iv = try DataCipher.AES.generateRandomIv()
 
-            localFileDataSource.writeFile(
+            applicationContainer.writeEncryptedData(
                 filePath: downloadContext.filePath,
                 salt: salt,
                 iv: iv,
