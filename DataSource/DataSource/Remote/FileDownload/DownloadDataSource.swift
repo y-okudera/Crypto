@@ -7,48 +7,31 @@
 
 import Foundation
 
-public enum DownloadDataSourceProvider {
-    public static func provide() -> DownloadDataSource {
-        return DownloadDataSourceImpl(
-            backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
-            localFileDataSource: LocalFileDataSourceProvider.provide(),
-            downloadSessionContextRepository: DownloadSessionContextRepositoryProvider.provide(),
-            downloadContextRepository: DownloadContextRepositoryProvider.provide(),
-            encryptedFileContextRepository: EncryptedFileContextRepositoryProvider.provide(),
-            semaphore: DispatchSemaphore(value: 0),
-            downloadQueue: DispatchQueue(label: "jp.yuoku.Crypto.Download", qos: .background)
-        )
-    }
-}
-
-public protocol DownloadDataSource: AnyObject {
+public protocol DownloadDataSourceProviding {
     func execute(contentId: Int, urls: [URL])
 }
 
-final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
+final class DownloadDataSource: NSObject, DownloadDataSourceProviding {
 
-    private let backgroundConfigurator: BackgroundConfigurator
-    private let localFileDataSource: LocalFileDataSource
-    private let downloadSessionContextRepository: DownloadSessionContextRepository
-    private let downloadContextRepository: DownloadContextRepository
-    private let encryptedFileContextRepository: EncryptedFileContextRepository
+    @Injected(\.backgroundConfiguratorProvider)
+    private var backgroundConfigurator: BackgroundConfiguratorProviding
+
+    @Injected(\.applicationContainerProvider)
+    private var applicationContainer: ApplicationContainerProviding
+
+    @Injected(\.downloadSessionContextRepositoryProvider)
+    private var downloadSessionContextRepository: DownloadSessionContextRepositoryProviding
+
+    @Injected(\.downloadContextRepositoryProvider)
+    private var downloadContextRepository: DownloadContextRepositoryProviding
+
+    @Injected(\.encryptedFileContextRepositoryProvider)
+    private var encryptedFileContextRepository: EncryptedFileContextRepositoryProviding
+
     private let semaphore: DispatchSemaphore
     private let downloadQueue: DispatchQueue
 
-    init(
-        backgroundConfigurator: BackgroundConfigurator,
-        localFileDataSource: LocalFileDataSource,
-        downloadSessionContextRepository: DownloadSessionContextRepository,
-        downloadContextRepository: DownloadContextRepository,
-        encryptedFileContextRepository: EncryptedFileContextRepository,
-        semaphore: DispatchSemaphore,
-        downloadQueue: DispatchQueue
-    ) {
-        self.backgroundConfigurator = backgroundConfigurator
-        self.localFileDataSource = localFileDataSource
-        self.downloadSessionContextRepository = downloadSessionContextRepository
-        self.downloadContextRepository = downloadContextRepository
-        self.encryptedFileContextRepository = encryptedFileContextRepository
+    init(semaphore: DispatchSemaphore, downloadQueue: DispatchQueue) {
         self.semaphore = semaphore
         self.downloadQueue = downloadQueue
     }
@@ -68,11 +51,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
             var tuple = [(context: DownloadContext, downloadTask: URLSessionDownloadTask)]()
             for (index, url) in urls.enumerated() {
                 let downloadTask = session.downloadTask(with: url)
-                downloadTask.earliestBeginDate = Date().addingTimeInterval(5)
-                downloadTask.countOfBytesClientExpectsToSend = 250
-                downloadTask.countOfBytesClientExpectsToReceive = 10 * 1024
-
-                let destinationUrl = self.localFileDataSource.downloadDataDirectory
+                let destinationUrl = self.applicationContainer.downloadDataDirectory
                     .appendingPathComponent("\(contentId)", isDirectory: true)
                     .appendingPathComponent(url.lastPathComponent)
                 let downloadContext = DownloadContext(
@@ -101,7 +80,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionDelegate {
+extension DownloadDataSource: URLSessionDelegate {
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         log("didBecomeInvalidWithError: \(String(describing: error))")
@@ -113,7 +92,7 @@ extension DownloadDataSourceImpl: URLSessionDelegate {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
+extension DownloadDataSource: URLSessionDownloadDelegate {
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         log("didFinishDownloadingTo", location)
@@ -128,7 +107,7 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
             let salt = try DataCipher.AES.generateRandomSalt()
             let iv = try DataCipher.AES.generateRandomIv()
 
-            localFileDataSource.writeFile(
+            applicationContainer.writeEncryptedData(
                 filePath: downloadContext.filePath,
                 salt: salt,
                 iv: iv,
@@ -158,7 +137,7 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionTaskDelegate {
+extension DownloadDataSource: URLSessionTaskDelegate {
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
         log("metrics:", metrics)

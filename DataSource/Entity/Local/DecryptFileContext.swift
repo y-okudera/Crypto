@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct DecryptFileContext {
-    public let filePath: String
-    public let salt: Data
-    public let iv: Data
+struct DecryptFileContext {
+    let filePath: String
+    let salt: Data
+    let iv: Data
 
-    public init(filePath: String, salt: Data, iv: Data) {
+    init(filePath: String, salt: Data, iv: Data) {
         self.filePath = filePath
         self.salt = salt
         self.iv = iv

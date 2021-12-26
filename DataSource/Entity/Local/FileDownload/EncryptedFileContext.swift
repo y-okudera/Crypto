@@ -7,18 +7,18 @@
 
 import RealmSwift
 
-public final class EncryptedFileContext: RealmSwift.Object {
-    @objc public dynamic var filePath: String = ""
-    @objc public dynamic var contentId: Int = 0
-    @objc public dynamic var index: Int = 0
-    @objc public dynamic var salt: Data = Data()
-    @objc public dynamic var iv: Data = Data()
+final class EncryptedFileContext: RealmSwift.Object {
+    @objc dynamic var filePath: String = ""
+    @objc dynamic var contentId: Int = 0
+    @objc dynamic var index: Int = 0
+    @objc dynamic var salt: Data = Data()
+    @objc dynamic var iv: Data = Data()
 
-    public override class func primaryKey() -> String? {
+    override class func primaryKey() -> String? {
         return "filePath"
     }
 
-    public convenience init(filePath: String, contentId: Int, index: Int, salt: Data, iv: Data) {
+    convenience init(filePath: String, contentId: Int, index: Int, salt: Data, iv: Data) {
         self.init()
         self.filePath = filePath
         self.contentId = contentId

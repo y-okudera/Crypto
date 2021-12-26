@@ -7,13 +7,7 @@
 
 import Foundation
 
-public enum DownloadSessionContextRepositoryProvider {
-    public static func provide() -> DownloadSessionContextRepository {
-        return DownloadSessionContextRepositoryImpl(realmDataStore: RealmDataStoreProvider.provide())
-    }
-}
-
-public protocol DownloadSessionContextRepository {
+protocol DownloadSessionContextRepositoryProviding {
     func update(sessionId: String, contentId: Int, downloadContexts: [DownloadContext])
 
     func read(sessionId: String) -> DownloadSessionContext?
@@ -21,13 +15,10 @@ public protocol DownloadSessionContextRepository {
     func delete(sessionId: String)
 }
 
-final class DownloadSessionContextRepositoryImpl: DownloadSessionContextRepository {
+final class DownloadSessionContextRepository: DownloadSessionContextRepositoryProviding {
 
-    let realmDataStore: RealmDataStore
-
-    init(realmDataStore: RealmDataStore) {
-        self.realmDataStore = realmDataStore
-    }
+    @Injected(\.realmDataStoreProvider)
+    private var realmDataStore: RealmDataStoreProviding
 
     func update(sessionId: String, contentId: Int, downloadContexts: [DownloadContext]) {
         let downloadSessionContext = DownloadSessionContext(sessionId: sessionId, contentId: contentId, downloadContexts: downloadContexts)

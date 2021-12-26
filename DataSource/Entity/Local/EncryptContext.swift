@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct EncryptContext {
-    public let plainData: Data
-    public let salt: Data
-    public let iv: Data
+struct EncryptContext {
+    let plainData: Data
+    let salt: Data
+    let iv: Data
 
-    public init(plainData: Data, salt: Data, iv: Data) {
+    init(plainData: Data, salt: Data, iv: Data) {
         self.plainData = plainData
         self.salt = salt
         self.iv = iv

@@ -7,59 +7,16 @@
 
 import Foundation
 
-enum BackgroundConfiguratorProvider {
-    static func provide() -> BackgroundConfigurator {
-        return BackgroundConfiguratorImpl()
-    }
+protocol BackgroundConfiguratorProviding {
+    func configuration(identifier: String) -> URLSessionConfiguration
 }
 
-protocol BackgroundConfigurator {
-    func configuration(
-        identifier: String,
-        allowsCellularAccess: Bool,
-        isDiscretionary: Bool,
-        sessionSendsLaunchEvents: Bool,
-        timeoutIntervalForRequest: TimeInterval,
-        timeoutIntervalForResource: TimeInterval
-    ) -> URLSessionConfiguration
-}
+final class BackgroundConfigurator: BackgroundConfiguratorProviding {
 
-extension BackgroundConfigurator {
-    func configuration(
-        identifier: String,
-        allowsCellularAccess: Bool = true,
-        isDiscretionary: Bool = true,
-        sessionSendsLaunchEvents: Bool = true,
-        timeoutIntervalForRequest: TimeInterval = 60,
-        timeoutIntervalForResource: TimeInterval = 60 * 60 * 24
-    ) -> URLSessionConfiguration {
-        self.configuration(
-            identifier: identifier,
-            allowsCellularAccess: allowsCellularAccess,
-            isDiscretionary: isDiscretionary,
-            sessionSendsLaunchEvents: sessionSendsLaunchEvents,
-            timeoutIntervalForRequest: timeoutIntervalForRequest,
-            timeoutIntervalForResource: timeoutIntervalForResource
-        )
-    }
-}
-
-final class BackgroundConfiguratorImpl: BackgroundConfigurator {
-
-    func configuration(
-        identifier: String,
-        allowsCellularAccess: Bool = true,
-        isDiscretionary: Bool = true,
-        sessionSendsLaunchEvents: Bool = true,
-        timeoutIntervalForRequest: TimeInterval = 60,
-        timeoutIntervalForResource: TimeInterval = 60 * 60 * 24
-    ) -> URLSessionConfiguration {
+    func configuration(identifier: String) -> URLSessionConfiguration {
         let configuration = URLSessionConfiguration.background(withIdentifier: identifier)
-        configuration.allowsCellularAccess = allowsCellularAccess
-        configuration.isDiscretionary = isDiscretionary
-        configuration.sessionSendsLaunchEvents = sessionSendsLaunchEvents
-        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
-        configuration.timeoutIntervalForResource = timeoutIntervalForResource
+        configuration.isDiscretionary = true
+        configuration.timeoutIntervalForResource = 60 * 60 * 24
 
         return configuration
     }
