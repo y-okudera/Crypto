@@ -9,7 +9,7 @@ import Foundation
 
 public enum EncryptedFileContextRepositoryProvider {
     public static func provide() -> EncryptedFileContextRepository {
-        return EncryptedFileContextRepositoryImpl(realmDataStore: RealmDataStoreProvider.provide())
+        return EncryptedFileContextRepositoryImpl()
     }
 }
 
@@ -19,11 +19,8 @@ public protocol EncryptedFileContextRepository {
 
 final class EncryptedFileContextRepositoryImpl: EncryptedFileContextRepository {
 
-    let realmDataStore: RealmDataStore
-
-    init(realmDataStore: RealmDataStore) {
-        self.realmDataStore = realmDataStore
-    }
+    @Injected(\.realmDataStoreProvider)
+    private var realmDataStore: RealmDataStoreProviding
 
     func update(filePath: String, contentId: Int, index: Int, salt: Data, iv: Data) {
         let encryptedFileContext = EncryptedFileContext(filePath: filePath, contentId: contentId, index: index, salt: salt, iv: iv)

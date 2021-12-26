@@ -17,6 +17,7 @@
 		B65A38C5277892B2001B7F31 /* InjectedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C4277892B2001B7F31 /* InjectedValues.swift */; };
 		B65A38C7277892CC001B7F31 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C6277892CC001B7F31 /* InjectionKey.swift */; };
 		B65A38CD2778C0B7001B7F31 /* ApplicationContainerProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38CC2778C0B7001B7F31 /* ApplicationContainerProviderKey.swift */; };
+		B65A38D02778CAFE001B7F31 /* RealmDataStoreProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38CF2778CAFE001B7F31 /* RealmDataStoreProviderKey.swift */; };
 		B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF2273FFA300060CF4A /* AppDelegate.swift */; };
 		B65B3DF5273FFA300060CF4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */; };
 		B65B3DF7273FFA300060CF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF6273FFA300060CF4A /* ViewController.swift */; };
@@ -127,6 +128,7 @@
 		B65A38C4277892B2001B7F31 /* InjectedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValues.swift; sourceTree = "<group>"; };
 		B65A38C6277892CC001B7F31 /* InjectionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionKey.swift; sourceTree = "<group>"; };
 		B65A38CC2778C0B7001B7F31 /* ApplicationContainerProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainerProviderKey.swift; sourceTree = "<group>"; };
+		B65A38CF2778CAFE001B7F31 /* RealmDataStoreProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStoreProviderKey.swift; sourceTree = "<group>"; };
 		B65B3DEF273FFA300060CF4A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B3DF2273FFA300060CF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				B65A38CB2778C099001B7F31 /* File */,
+				B65A38CE2778CAE7001B7F31 /* Realm */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -267,6 +270,14 @@
 				B65A38CC2778C0B7001B7F31 /* ApplicationContainerProviderKey.swift */,
 			);
 			path = File;
+			sourceTree = "<group>";
+		};
+		B65A38CE2778CAE7001B7F31 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				B65A38CF2778CAFE001B7F31 /* RealmDataStoreProviderKey.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		B65B3DE6273FFA300060CF4A = {
@@ -734,6 +745,7 @@
 				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
+				B65A38D02778CAFE001B7F31 /* RealmDataStoreProviderKey.swift in Sources */,
 				B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
 				B646FD7F27551A8C0079802D /* EncryptedFileContextRepository.swift in Sources */,

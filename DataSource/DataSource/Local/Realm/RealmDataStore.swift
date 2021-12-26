@@ -7,19 +7,7 @@
 
 import RealmSwift
 
-public enum RealmDataStoreProvider {
-    public static func provide() -> RealmDataStore {
-        var configuration = Realm.Configuration()
-        let keyString = "ssuMMd3a97IIGbGxF4kLP6y0Vf723qklg8IaIZHEQgUNnb9lE1W1wx4nlLCgQa0p"
-        let keyData = keyString.data(using: .utf8)
-        configuration.encryptionKey = keyData
-
-        log("Realm encryptionKey -> " + keyData!.map { String(format: "%.2hhx", $0) }.joined())
-        return RealmDataStoreImpl(realmConfigurator: RealmConfiguratorProvider.provide(configuration: configuration))
-    }
-}
-
-public protocol RealmDataStore {
+public protocol RealmDataStoreProviding {
 
     var realm: Realm { get }
 
@@ -55,7 +43,7 @@ public protocol RealmDataStore {
     func findByIds(ids: [Any], type: RealmSwift.Object.Type) -> Results<RealmSwift.Object>?
 }
 
-final class RealmDataStoreImpl: RealmDataStore, ExceptionCatchable {
+final class RealmDataStore: RealmDataStoreProviding, ExceptionCatchable {
 
     let realmConfigurator: RealmConfigurator
 
@@ -193,7 +181,7 @@ final class RealmDataStoreImpl: RealmDataStore, ExceptionCatchable {
 }
 
 // MARK: - private
-extension RealmDataStoreImpl {
+extension RealmDataStore {
 
     private func transaction(block:(() throws -> Void)? = nil) throws {
         realm.beginWrite()

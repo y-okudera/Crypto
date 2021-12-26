@@ -9,7 +9,7 @@ import Foundation
 
 public enum DownloadContextRepositoryProvider {
     public static func provide() -> DownloadContextRepository {
-        return DownloadContextRepositoryImpl(realmDataStore: RealmDataStoreProvider.provide())
+        return DownloadContextRepositoryImpl()
     }
 }
 
@@ -18,13 +18,10 @@ public protocol DownloadContextRepository {
 }
 
 final class DownloadContextRepositoryImpl: DownloadContextRepository {
-    
-    let realmDataStore: RealmDataStore
-    
-    init(realmDataStore: RealmDataStore) {
-        self.realmDataStore = realmDataStore
-    }
-    
+
+    @Injected(\.realmDataStoreProvider)
+    private var realmDataStore: RealmDataStoreProviding
+
     func update(downloadContext: DownloadContext, updateBlock: @escaping(() -> Void)) {
         do {
             try realmDataStore.update(object: downloadContext, block: updateBlock)
