@@ -49,6 +49,7 @@
 		B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */; };
 		B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */; };
 		B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */; };
+		B67600772778D3B000319833 /* BackgroundConfiguratorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */; };
 		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
 		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
@@ -167,6 +168,7 @@
 		B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
+		B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfiguratorProviderKey.swift; sourceTree = "<group>"; };
 		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
 		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		B65A38C92778C087001B7F31 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				B67600742778D38F00319833 /* Remote */,
 				B65A38CA2778C090001B7F31 /* Local */,
 			);
 			path = DataSource;
@@ -514,6 +517,22 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		B67600742778D38F00319833 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				B67600752778D39B00319833 /* FileDownload */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		B67600752778D39B00319833 /* FileDownload */ = {
+			isa = PBXGroup;
+			children = (
+				B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */,
+			);
+			path = FileDownload;
+			sourceTree = "<group>";
+		};
 		FC9F7CD227531F7400E88383 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -763,6 +782,7 @@
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */,
 				B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */,
+				B67600772778D3B000319833 /* BackgroundConfiguratorProviderKey.swift in Sources */,
 				B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */,
 				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
 				B65A38D02778CAFE001B7F31 /* RealmDataStoreProviderKey.swift in Sources */,

@@ -10,7 +10,6 @@ import Foundation
 public enum DownloadDataSourceProvider {
     public static func provide() -> DownloadDataSource {
         return DownloadDataSourceImpl(
-            backgroundConfigurator: BackgroundConfiguratorProvider.provide(),
             semaphore: DispatchSemaphore(value: 0),
             downloadQueue: DispatchQueue(label: "jp.yuoku.Crypto.Download", qos: .background)
         )
@@ -23,7 +22,8 @@ public protocol DownloadDataSource: AnyObject {
 
 final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
 
-    private let backgroundConfigurator: BackgroundConfigurator
+    @Injected(\.backgroundConfiguratorProvider)
+    private var backgroundConfigurator: BackgroundConfiguratorProviding
 
     @Injected(\.applicationContainerProvider)
     private var applicationContainer: ApplicationContainerProviding
@@ -40,12 +40,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
     private let semaphore: DispatchSemaphore
     private let downloadQueue: DispatchQueue
 
-    init(
-        backgroundConfigurator: BackgroundConfigurator,
-        semaphore: DispatchSemaphore,
-        downloadQueue: DispatchQueue
-    ) {
-        self.backgroundConfigurator = backgroundConfigurator
+    init(semaphore: DispatchSemaphore, downloadQueue: DispatchQueue) {
         self.semaphore = semaphore
         self.downloadQueue = downloadQueue
     }

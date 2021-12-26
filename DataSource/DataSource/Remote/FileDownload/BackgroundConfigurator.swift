@@ -7,17 +7,11 @@
 
 import Foundation
 
-enum BackgroundConfiguratorProvider {
-    static func provide() -> BackgroundConfigurator {
-        return BackgroundConfiguratorImpl()
-    }
-}
-
-protocol BackgroundConfigurator {
+protocol BackgroundConfiguratorProviding {
     func configuration(identifier: String) -> URLSessionConfiguration
 }
 
-final class BackgroundConfiguratorImpl: BackgroundConfigurator {
+final class BackgroundConfigurator: BackgroundConfiguratorProviding {
 
     func configuration(identifier: String) -> URLSessionConfiguration {
         let configuration = URLSessionConfiguration.background(withIdentifier: identifier)
