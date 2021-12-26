@@ -13,6 +13,9 @@
 		B646FD7B2755153D0079802D /* DownloadSessionContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */; };
 		B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7C275518F00079802D /* DownloadContextRepository.swift */; };
 		B646FD7F27551A8C0079802D /* EncryptedFileContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */; };
+		B65A38C32778928F001B7F31 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C22778928F001B7F31 /* Injected.swift */; };
+		B65A38C5277892B2001B7F31 /* InjectedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C4277892B2001B7F31 /* InjectedValues.swift */; };
+		B65A38C7277892CC001B7F31 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C6277892CC001B7F31 /* InjectionKey.swift */; };
 		B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF2273FFA300060CF4A /* AppDelegate.swift */; };
 		B65B3DF5273FFA300060CF4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */; };
 		B65B3DF7273FFA300060CF4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3DF6273FFA300060CF4A /* ViewController.swift */; };
@@ -119,6 +122,9 @@
 		B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepository.swift; sourceTree = "<group>"; };
 		B646FD7C275518F00079802D /* DownloadContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepository.swift; sourceTree = "<group>"; };
 		B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepository.swift; sourceTree = "<group>"; };
+		B65A38C22778928F001B7F31 /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
+		B65A38C4277892B2001B7F31 /* InjectedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValues.swift; sourceTree = "<group>"; };
+		B65A38C6277892CC001B7F31 /* InjectionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionKey.swift; sourceTree = "<group>"; };
 		B65B3DEF273FFA300060CF4A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B3DF2273FFA300060CF4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +217,24 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		B65A38C027789266001B7F31 /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				B65A38C12778927A001B7F31 /* Injected */,
+			);
+			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		B65A38C12778927A001B7F31 /* Injected */ = {
+			isa = PBXGroup;
+			children = (
+				B65A38C22778928F001B7F31 /* Injected.swift */,
+				B65A38C4277892B2001B7F31 /* InjectedValues.swift */,
+				B65A38C6277892CC001B7F31 /* InjectionKey.swift */,
+			);
+			path = Injected;
+			sourceTree = "<group>";
+		};
 		B65B3DE6273FFA300060CF4A = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +294,7 @@
 		B65B3E7727401EB70060CF4A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				B65A38C027789266001B7F31 /* PropertyWrapper */,
 				B65B3E9327401ECA0060CF4A /* DataSource */,
 				B65B3EA2274114760060CF4A /* Entity */,
 				B646FD79275514F10079802D /* Repository */,
@@ -668,8 +693,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65A38C7277892CC001B7F31 /* InjectionKey.swift in Sources */,
 				B646FD7B2755153D0079802D /* DownloadSessionContextRepository.swift in Sources */,
 				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
+				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
 				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
 				B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */,
@@ -684,6 +711,7 @@
 				B66585E427532BCF0019E845 /* RealmDataStore.swift in Sources */,
 				FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */,
 				FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */,
+				B65A38C5277892B2001B7F31 /* InjectedValues.swift in Sources */,
 				B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */,
 				B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */,
 				B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */,
