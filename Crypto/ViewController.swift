@@ -19,7 +19,8 @@ class ViewController: UIViewController {
         return imageView
     }()
 
-    let downloadDataSource = DownloadDataSourceProvider.provide()
+    @Injected(\.downloadDataSourceProvider)
+    private var downloadDataSource: DownloadDataSourceProviding
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,20 +7,11 @@
 
 import Foundation
 
-public enum DownloadDataSourceProvider {
-    public static func provide() -> DownloadDataSource {
-        return DownloadDataSourceImpl(
-            semaphore: DispatchSemaphore(value: 0),
-            downloadQueue: DispatchQueue(label: "jp.yuoku.Crypto.Download", qos: .background)
-        )
-    }
-}
-
-public protocol DownloadDataSource: AnyObject {
+public protocol DownloadDataSourceProviding {
     func execute(contentId: Int, urls: [URL])
 }
 
-final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
+final class DownloadDataSource: NSObject, DownloadDataSourceProviding {
 
     @Injected(\.backgroundConfiguratorProvider)
     private var backgroundConfigurator: BackgroundConfiguratorProviding
@@ -89,7 +80,7 @@ final class DownloadDataSourceImpl: NSObject, DownloadDataSource {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionDelegate {
+extension DownloadDataSource: URLSessionDelegate {
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         log("didBecomeInvalidWithError: \(String(describing: error))")
@@ -101,7 +92,7 @@ extension DownloadDataSourceImpl: URLSessionDelegate {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
+extension DownloadDataSource: URLSessionDownloadDelegate {
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         log("didFinishDownloadingTo", location)
@@ -146,7 +137,7 @@ extension DownloadDataSourceImpl: URLSessionDownloadDelegate {
     }
 }
 
-extension DownloadDataSourceImpl: URLSessionTaskDelegate {
+extension DownloadDataSource: URLSessionTaskDelegate {
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
         log("metrics:", metrics)

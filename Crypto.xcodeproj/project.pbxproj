@@ -51,6 +51,7 @@
 		B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */; };
 		B67600772778D3B000319833 /* BackgroundConfiguratorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */; };
 		B67600792778D5A200319833 /* RealmConfiguratorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600782778D5A200319833 /* RealmConfiguratorProviderKey.swift */; };
+		B676007B2778DA8B00319833 /* DownloadDataSourceProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */; };
 		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
 		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
 		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
@@ -171,6 +172,7 @@
 		B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfiguratorProviderKey.swift; sourceTree = "<group>"; };
 		B67600782778D5A200319833 /* RealmConfiguratorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmConfiguratorProviderKey.swift; sourceTree = "<group>"; };
+		B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSourceProviderKey.swift; sourceTree = "<group>"; };
 		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
 		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
 		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */,
+				B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */,
 			);
 			path = FileDownload;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */,
 				B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
+				B676007B2778DA8B00319833 /* DownloadDataSourceProviderKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
