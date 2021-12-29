@@ -17,6 +17,16 @@ final class DownloadContext: RealmSwift.Object {
         return "filePath"
     }
 
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Self else {
+            return false
+        }
+        return filePath == object.filePath
+        && taskId == object.taskId
+        && index == object.index
+        && isDownloaded == object.isDownloaded
+    }
+
     convenience init(filePath: String, taskId: Int, index: Int, isDownloaded: Bool) {
         self.init()
         self.filePath = filePath

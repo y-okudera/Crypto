@@ -7,6 +7,9 @@
 
 import RealmSwift
 
+typealias UpdateBlock = () -> Void
+
+/// @mockable
 protocol RealmDataStoreProviding {
 
     var realm: Realm { get }
@@ -22,7 +25,7 @@ protocol RealmDataStoreProviding {
 
     /// レコード更新
     /// RealmSwift.ObjectにprimaryKey()が実装されている場合のみ有効
-    func update(object: RealmSwift.Object, block:(() -> Void)?) throws
+    func update(object: RealmSwift.Object, block: UpdateBlock?) throws
 
     /// レコード全削除
     func deleteAll(for type: RealmSwift.Object.Type) throws
@@ -102,7 +105,7 @@ final class RealmDataStore: RealmDataStoreProviding, ExceptionCatchable {
 
     /// レコード更新
     /// RealmSwift.ObjectにprimaryKey()が実装されている場合のみ有効
-    func update(object: RealmSwift.Object, block:(() -> Void)? = nil) throws {
+    func update(object: RealmSwift.Object, block: UpdateBlock?) throws {
         let executionError = executionBlock(realm: realm) { [weak self] in
             block?()
             self?.realm.add(object, update: .modified)

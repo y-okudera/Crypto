@@ -16,6 +16,15 @@ final class DownloadSessionContext: RealmSwift.Object {
         return "sessionId"
     }
 
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Self else {
+            return false
+        }
+        return sessionId == object.sessionId
+        && contentId == object.contentId
+        && Array(downloadContexts) == Array(object.downloadContexts)
+    }
+
     convenience init(sessionId: String, contentId: Int, downloadContexts: [DownloadContext]) {
         self.init()
         self.sessionId = sessionId

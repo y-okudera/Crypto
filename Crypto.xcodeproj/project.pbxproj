@@ -10,6 +10,11 @@
 		B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */; };
 		B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */; };
 		B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NSNotificationName+.swift */; };
+		B63EE322277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */; };
+		B63EE324277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */; };
+		B641B7FA277A2C480065217E /* DownloadContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */; };
+		B641B7FE277A2FE30065217E /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B641B7FD277A2FE30065217E /* .gitkeep */; };
+		B641B800277A31930065217E /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B641B7FF277A31930065217E /* Mock.swift */; };
 		B646FD7B2755153D0079802D /* DownloadSessionContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */; };
 		B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7C275518F00079802D /* DownloadContextRepository.swift */; };
 		B646FD7F27551A8C0079802D /* EncryptedFileContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */; };
@@ -29,7 +34,6 @@
 		B65B3E16273FFA310060CF4A /* CryptoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E15273FFA310060CF4A /* CryptoUITestsLaunchTests.swift */; };
 		B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E7927401EB70060CF4A /* DataSource.docc */; };
 		B65B3E8027401EB70060CF4A /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; };
-		B65B3E8727401EB70060CF4A /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E8627401EB70060CF4A /* DataSourceTests.swift */; };
 		B65B3E8827401EB70060CF4A /* DataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = B65B3E7827401EB70060CF4A /* DataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B65B3E8B27401EB70060CF4A /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; };
 		B65B3E8C27401EB70060CF4A /* DataSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -127,6 +131,11 @@
 		B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurator.swift; sourceTree = "<group>"; };
 		B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSource.swift; sourceTree = "<group>"; };
 		B6171B16274D4B7500D19351 /* NSNotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+.swift"; sourceTree = "<group>"; };
+		B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryTests.swift; sourceTree = "<group>"; };
+		B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryTests.swift; sourceTree = "<group>"; };
+		B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepositoryTests.swift; sourceTree = "<group>"; };
+		B641B7FD277A2FE30065217E /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		B641B7FF277A31930065217E /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepository.swift; sourceTree = "<group>"; };
 		B646FD7C275518F00079802D /* DownloadContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepository.swift; sourceTree = "<group>"; };
 		B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepository.swift; sourceTree = "<group>"; };
@@ -152,7 +161,6 @@
 		B65B3E7827401EB70060CF4A /* DataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		B65B3E7927401EB70060CF4A /* DataSource.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DataSource.docc; sourceTree = "<group>"; };
 		B65B3E7F27401EB70060CF4A /* DataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B65B3E8627401EB70060CF4A /* DataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
 		B65B3E9B274039420060CF4A /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -223,6 +231,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B641B7F8277A2C320065217E /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */,
+				B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */,
+				B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B641B7FB277A2FC20065217E /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B641B7FC277A2FD00065217E /* Generated */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B641B7FC277A2FD00065217E /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				B641B7FF277A31930065217E /* Mock.swift */,
+				B641B7FD277A2FE30065217E /* .gitkeep */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		B646FD79275514F10079802D /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,7 +403,8 @@
 		B65B3E8527401EB70060CF4A /* DataSourceTests */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E8627401EB70060CF4A /* DataSourceTests.swift */,
+				B641B7FB277A2FC20065217E /* Mock */,
+				B641B7F8277A2C320065217E /* Repository */,
 			);
 			path = DataSourceTests;
 			sourceTree = "<group>";
@@ -682,7 +718,6 @@
 					};
 					B65B3E7E27401EB70060CF4A = {
 						CreatedOnToolsVersion = 13.0;
-						TestTargetID = B65B3DEE273FFA300060CF4A;
 					};
 				};
 			};
@@ -744,6 +779,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B641B7FE277A2FE30065217E /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,7 +855,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B65B3E8727401EB70060CF4A /* DataSourceTests.swift in Sources */,
+				B641B7FA277A2C480065217E /* DownloadContextRepositoryTests.swift in Sources */,
+				B63EE322277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift in Sources */,
+				B63EE324277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift in Sources */,
+				B641B800277A31930065217E /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,7 +1279,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypto.app/Crypto";
 			};
 			name = Debug;
 		};
@@ -1264,7 +1302,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypto.app/Crypto";
 			};
 			name = Release;
 		};
