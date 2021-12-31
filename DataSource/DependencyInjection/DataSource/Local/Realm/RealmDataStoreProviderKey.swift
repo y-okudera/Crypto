@@ -17,4 +17,3 @@ extension InjectedValues {
         set { Self[RealmDataStoreProviderKey.self] = newValue }
     }
 }
-
