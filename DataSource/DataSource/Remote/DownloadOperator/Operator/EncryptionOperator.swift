@@ -14,8 +14,8 @@ public protocol EncryptionOperatorProviding {
 
 class EncryptionOperator: EncryptionOperatorProviding {
 
-    @Injected(\.writeFileOperatorProvider)
-    private var writeFileOperator: WriteFileOperatorProviding
+    @Injected(\.registryOperatorProvider)
+    private var registryOperator: RegistryOperatorProviding
 
     func startEncryption(encryptorMetadata: EncryptorMetadata, pendingOperations: PendingOperations) {
         let encryptor = Encryptor(encryptorMetadata: encryptorMetadata)
@@ -33,7 +33,7 @@ class EncryptionOperator: EncryptionOperatorProviding {
         pendingOperations.encryptionsInProgress[encryptor.encryptorMetadata.contentId.description] = nil
         log("Finish Encryption Operation", Thread.current, encryptor.encryptorMetadata.contentId)
 
-        let fileWriterMetadata = FileWriterMetadata(encryptorMetadata: encryptor.encryptorMetadata)
-        writeFileOperator.startWritingToFile(fileWriterMetadata: fileWriterMetadata, pendingOperations: pendingOperations)
+        let registryMetadata = RegistryMetadata(encryptorMetadata: encryptor.encryptorMetadata)
+        registryOperator.startRegistry(registryMetadata: registryMetadata, pendingOperations: pendingOperations)
     }
 }

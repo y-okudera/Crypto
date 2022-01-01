@@ -1,5 +1,5 @@
 //
-//  FileWriterMetadata.swift
+//  RegistryMetadata.swift
 //  DataSource
 //
 //  Created by Yuki Okudera on 2021/12/31.
@@ -7,29 +7,29 @@
 
 import Foundation
 
-public final class FileWriterMetadata {
+public final class RegistryMetadata {
 
     /// Used for directory names.
     let contentId: Int
-    let fileWriterItems: [FileWriterItem]
+    let registryItems: [RegistryItem]
     var state: OperationState
 
-    init(contentId: Int, fileWriterItems: [FileWriterItem], state: OperationState) {
+    init(contentId: Int, registryItems: [RegistryItem], state: OperationState) {
         self.contentId = contentId
-        self.fileWriterItems = fileWriterItems
+        self.registryItems = registryItems
         self.state = state
     }
 
     convenience init(encryptorMetadata: EncryptorMetadata) {
         self.init(
             contentId: encryptorMetadata.contentId,
-            fileWriterItems: encryptorMetadata.encryptorItems.compactMap { .init(encryptorItem: $0) },
+            registryItems: encryptorMetadata.encryptorItems.compactMap { .init(encryptorItem: $0) },
             state: encryptorMetadata.state
         )
     }
 }
 
-final class FileWriterItem {
+final class RegistryItem {
     let destinationPath: String
     let plainData: Data
     let encryptedData: Data

@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */; };
 		B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NSNotificationName+.swift */; };
-		B63BFB33277EA7F0005D8A51 /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB32277EA7F0005D8A51 /* FileWriter.swift */; };
-		B63BFB36277EA909005D8A51 /* FileWriterMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB35277EA909005D8A51 /* FileWriterMetadata.swift */; };
+		B63BFB33277EA7F0005D8A51 /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB32277EA7F0005D8A51 /* Registry.swift */; };
+		B63BFB36277EA909005D8A51 /* RegistryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */; };
 		B63BFB3F277ED4C8005D8A51 /* DownloadManagerProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB3E277ED4C8005D8A51 /* DownloadManagerProviderKey.swift */; };
 		B63BFB44277F0883005D8A51 /* DownloadOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB43277F0883005D8A51 /* DownloadOperator.swift */; };
 		B63BFB46277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */; };
 		B63BFB48277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */; };
-		B63BFB4A277F1066005D8A51 /* WriteFileOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB49277F1066005D8A51 /* WriteFileOperatorProviderKey.swift */; };
+		B63BFB4A277F1066005D8A51 /* RegistryOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */; };
 		B63BFB4C277F10DF005D8A51 /* EncryptionOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */; };
-		B63BFB4E277F111F005D8A51 /* WriteFileOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB4D277F111F005D8A51 /* WriteFileOperator.swift */; };
+		B63BFB4E277F111F005D8A51 /* RegistryOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */; };
 		B63BFB54277F1D18005D8A51 /* DownloadManagerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB53277F1D18005D8A51 /* DownloadManagerWrapper.swift */; };
 		B63EE324277C0697008C5632 /* EncryptedFileRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE323277C0697008C5632 /* EncryptedFileRepositoryTests.swift */; };
 		B641B7FE277A2FE30065217E /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B641B7FD277A2FE30065217E /* .gitkeep */; };
@@ -136,15 +136,15 @@
 /* Begin PBXFileReference section */
 		B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurator.swift; sourceTree = "<group>"; };
 		B6171B16274D4B7500D19351 /* NSNotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+.swift"; sourceTree = "<group>"; };
-		B63BFB32277EA7F0005D8A51 /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
-		B63BFB35277EA909005D8A51 /* FileWriterMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriterMetadata.swift; sourceTree = "<group>"; };
+		B63BFB32277EA7F0005D8A51 /* Registry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registry.swift; sourceTree = "<group>"; };
+		B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryMetadata.swift; sourceTree = "<group>"; };
 		B63BFB3E277ED4C8005D8A51 /* DownloadManagerProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerProviderKey.swift; sourceTree = "<group>"; };
 		B63BFB43277F0883005D8A51 /* DownloadOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperator.swift; sourceTree = "<group>"; };
 		B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperatorProviderKey.swift; sourceTree = "<group>"; };
 		B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionOperatorProviderKey.swift; sourceTree = "<group>"; };
-		B63BFB49277F1066005D8A51 /* WriteFileOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFileOperatorProviderKey.swift; sourceTree = "<group>"; };
+		B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryOperatorProviderKey.swift; sourceTree = "<group>"; };
 		B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionOperator.swift; sourceTree = "<group>"; };
-		B63BFB4D277F111F005D8A51 /* WriteFileOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFileOperator.swift; sourceTree = "<group>"; };
+		B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryOperator.swift; sourceTree = "<group>"; };
 		B63BFB53277F1D18005D8A51 /* DownloadManagerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerWrapper.swift; sourceTree = "<group>"; };
 		B63EE323277C0697008C5632 /* EncryptedFileRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileRepositoryTests.swift; sourceTree = "<group>"; };
 		B641B7FD277A2FE30065217E /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -268,12 +268,12 @@
 			path = Encryptor;
 			sourceTree = "<group>";
 		};
-		B63BFB3A277ECFD9005D8A51 /* FileWriter */ = {
+		B63BFB3A277ECFD9005D8A51 /* Registry */ = {
 			isa = PBXGroup;
 			children = (
-				B63BFB32277EA7F0005D8A51 /* FileWriter.swift */,
+				B63BFB32277EA7F0005D8A51 /* Registry.swift */,
 			);
-			path = FileWriter;
+			path = Registry;
 			sourceTree = "<group>";
 		};
 		B63BFB3B277ED2F9005D8A51 /* Operation */ = {
@@ -313,7 +313,7 @@
 			children = (
 				B63BFB43277F0883005D8A51 /* DownloadOperator.swift */,
 				B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */,
-				B63BFB4D277F111F005D8A51 /* WriteFileOperator.swift */,
+				B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */,
 			);
 			path = Operator;
 			sourceTree = "<group>";
@@ -323,33 +323,9 @@
 			children = (
 				B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */,
 				B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */,
-				B63BFB49277F1066005D8A51 /* WriteFileOperatorProviderKey.swift */,
+				B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */,
 			);
 			path = Operator;
-			sourceTree = "<group>";
-		};
-		B63BFB4F277F1A88005D8A51 /* BackgroundDownloader */ = {
-			isa = PBXGroup;
-			children = (
-				B6658DA2277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift */,
-			);
-			path = BackgroundDownloader;
-			sourceTree = "<group>";
-		};
-		B63BFB50277F1A91005D8A51 /* Encryptor */ = {
-			isa = PBXGroup;
-			children = (
-				B6658DA4277CD9F300C79CAE /* EncryptorMetadata.swift */,
-			);
-			path = Encryptor;
-			sourceTree = "<group>";
-		};
-		B63BFB51277F1AA5005D8A51 /* FileWriter */ = {
-			isa = PBXGroup;
-			children = (
-				B63BFB35277EA909005D8A51 /* FileWriterMetadata.swift */,
-			);
-			path = FileWriter;
 			sourceTree = "<group>";
 		};
 		B63BFB52277F1D03005D8A51 /* Wrapper */ = {
@@ -687,7 +663,7 @@
 				B63BFB34277EA800005D8A51 /* AsyncOperation */,
 				B63BFB38277ECFB4005D8A51 /* BackgroundDownloader */,
 				B63BFB39277ECFCB005D8A51 /* Encryptor */,
-				B63BFB3A277ECFD9005D8A51 /* FileWriter */,
+				B63BFB3A277ECFD9005D8A51 /* Registry */,
 			);
 			path = Operation;
 			sourceTree = "<group>";
@@ -695,9 +671,9 @@
 		B6658DB0277CDB8400C79CAE /* OperationMetadata */ = {
 			isa = PBXGroup;
 			children = (
-				B63BFB4F277F1A88005D8A51 /* BackgroundDownloader */,
-				B63BFB50277F1A91005D8A51 /* Encryptor */,
-				B63BFB51277F1AA5005D8A51 /* FileWriter */,
+				B6658DA2277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift */,
+				B6658DA4277CD9F300C79CAE /* EncryptorMetadata.swift */,
+				B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */,
 			);
 			path = OperationMetadata;
 			sourceTree = "<group>";
@@ -988,11 +964,11 @@
 				B6658D9E277CCDB800C79CAE /* Array+.swift in Sources */,
 				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
 				B65B3E9A27401F190060CF4A /* AES.swift in Sources */,
-				B63BFB4A277F1066005D8A51 /* WriteFileOperatorProviderKey.swift in Sources */,
+				B63BFB4A277F1066005D8A51 /* RegistryOperatorProviderKey.swift in Sources */,
 				B6658DA9277CDA5E00C79CAE /* BackgroundDownloader.swift in Sources */,
 				B67600792778D5A200319833 /* RealmConfiguratorProviderKey.swift in Sources */,
-				B63BFB33277EA7F0005D8A51 /* FileWriter.swift in Sources */,
-				B63BFB36277EA909005D8A51 /* FileWriterMetadata.swift in Sources */,
+				B63BFB33277EA7F0005D8A51 /* Registry.swift in Sources */,
+				B63BFB36277EA909005D8A51 /* RegistryMetadata.swift in Sources */,
 				B6658DAD277CDAED00C79CAE /* DownloadManager.swift in Sources */,
 				B67600732778D27800319833 /* EncryptedFileRepositoryProviderKey.swift in Sources */,
 				B6658DA5277CD9F300C79CAE /* EncryptorMetadata.swift in Sources */,
@@ -1017,7 +993,7 @@
 				B63BFB48277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift in Sources */,
 				B6507ACE277E085B008F11CA /* AsyncOperation.swift in Sources */,
 				B6658DA1277CD9A700C79CAE /* OperationState.swift in Sources */,
-				B63BFB4E277F111F005D8A51 /* WriteFileOperator.swift in Sources */,
+				B63BFB4E277F111F005D8A51 /* RegistryOperator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

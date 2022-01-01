@@ -24,8 +24,8 @@ public final class PendingOperations {
         return queue
     }()
 
-    lazy var writingToFilesInProgress: [String: Operation] = [:]
-    lazy var writingToFileQueue: OperationQueue = {
+    lazy var registryInProgress: [String: Operation] = [:]
+    lazy var registryQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.name = "WritingToFileQueue"
         queue.maxConcurrentOperationCount = 1
