@@ -18,19 +18,25 @@ class EncryptionOperator: EncryptionOperatorProviding {
     private var registryOperator: RegistryOperatorProviding
 
     func startEncryption(encryptorMetadata: EncryptorMetadata, pendingOperations: PendingOperations) {
+        guard pendingOperations.encryptionInProgress[encryptorMetadata.contentId.description] == nil else {
+            log("Already in progress. contentId: \(encryptorMetadata.contentId)")
+            return
+        }
         let encryptor = Encryptor(encryptorMetadata: encryptorMetadata)
         encryptor.completionBlock = { [weak self] in
             self?.encryptorCompletion(encryptor: encryptor, pendingOperations: pendingOperations)
         }
-        pendingOperations.encryptionsInProgress[encryptor.encryptorMetadata.contentId.description] = encryptor
+        pendingOperations.encryptionInProgress[encryptor.encryptorMetadata.contentId.description] = encryptor
         pendingOperations.encryptionQueue.addOperation(encryptor)
+        log("encryptionInProgress", pendingOperations.encryptionInProgress.count)
     }
 
     func encryptorCompletion(encryptor: Encryptor, pendingOperations: PendingOperations) {
         if encryptor.isCancelled {
             return
         }
-        pendingOperations.encryptionsInProgress[encryptor.encryptorMetadata.contentId.description] = nil
+        pendingOperations.encryptionInProgress.removeValue(forKey: encryptor.encryptorMetadata.contentId.description)
+        log("encryptionInProgress", pendingOperations.encryptionInProgress.count)
         log("Finish Encryption Operation", Thread.current, encryptor.encryptorMetadata.contentId)
 
         let registryMetadata = RegistryMetadata(encryptorMetadata: encryptor.encryptorMetadata)

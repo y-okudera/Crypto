@@ -8,18 +8,18 @@
 import Foundation
 
 public final class PendingOperations {
-    lazy var downloadsInProgress: [String: Operation] = [:]
-    lazy var downloadQueue: OperationQueue = {
+    lazy var downloaderInProgress: [String: Operation] = [:]
+    lazy var downloaderQueue: OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "Downloadueue"
+        queue.name = "jp.yuoku.DataSource.DownloaderQueue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
 
-    lazy var encryptionsInProgress: [String: Operation] = [:]
+    lazy var encryptionInProgress: [String: Operation] = [:]
     lazy var encryptionQueue: OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "EncryptionQueue"
+        queue.name = "jp.yuoku.DataSource.EncryptionQueue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
@@ -27,7 +27,7 @@ public final class PendingOperations {
     lazy var registryInProgress: [String: Operation] = [:]
     lazy var registryQueue: OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "WritingToFileQueue"
+        queue.name = "jp.yuoku.DataSource.RegistryQueue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()

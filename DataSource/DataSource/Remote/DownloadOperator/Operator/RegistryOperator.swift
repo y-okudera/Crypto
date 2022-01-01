@@ -14,7 +14,10 @@ public protocol RegistryOperatorProviding {
 
 class RegistryOperator: RegistryOperatorProviding {
     func startRegistry(registryMetadata: RegistryMetadata, pendingOperations: PendingOperations) {
-
+        guard pendingOperations.registryInProgress[registryMetadata.contentId.description] == nil else {
+            log("Already in progress. contentId: \(registryMetadata.contentId)")
+            return
+        }
         let registry = Registry(registryMetadata: registryMetadata)
         registry.completionBlock = { [weak self] in
             self?.registryCompletion(registry: registry, pendingOperations: pendingOperations)
