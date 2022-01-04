@@ -21,13 +21,10 @@ public protocol ApplicationContainerProviding {
     /// - Parameters:
     ///   - data: 保存するデータ
     ///   - filePath: ファイルパス
-    func writePlainData(_ data: Data, filePath: String) throws
+    func writeData(_ data: Data, filePath: String) throws
 
     /// ファイルからデータを読み込む
     func readPlainData(filePath: String) throws -> Data
-
-    /// データを暗号化してファイルに書き込む
-    func writeEncryptedData(filePath: String, salt: Data, iv: Data, password: String, from location: URL)
 
     /// ファイルからデータを読み込んで復号する
     func readEncryptedData(filePath: String, salt: Data, iv: Data, password: String) -> Data?
@@ -69,13 +66,13 @@ final class ApplicationContainer: ApplicationContainerProviding {
         }
     }
 
-    // MARK: - Handle file with plain data
-
-    func writePlainData(_ data: Data, filePath: String) throws {
-        let destination = URL(fileURLWithPath: filePath)
-        log("destination", filePath)
+    func writeData(_ data: Data, filePath: String) throws {
+        let directoryUrl = URL(fileURLWithPath: filePath).deletingLastPathComponent()
+        createDirectory(path: directoryUrl.path)
 
         do {
+            let destination = URL(fileURLWithPath: filePath)
+            log("destination", destination.absoluteURL)
             try data.write(to: destination, options: .atomic)
         } catch {
             log("Write to file error: \(error)")
@@ -93,46 +90,18 @@ final class ApplicationContainer: ApplicationContainerProviding {
         }
     }
 
-    // MARK: - Handle file with encrypted data
-
-    func writeEncryptedData(filePath: String, salt: Data, iv: Data, password: String, from location: URL) {
-        let directoryUrl = URL(fileURLWithPath: filePath).deletingLastPathComponent()
-        createDirectory(path: directoryUrl.path)
-
-        do {
-            let reader = try FileHandle(forReadingFrom: location)
-            let data = reader.readDataToEndOfFile()
-            let encryptContext = EncryptContext(plainData: data, salt: salt, iv: iv)
-
-            let encryptedData = try DataCipher.AES.encrypt(encryptContext: encryptContext, password: password)
-            let destination = URL(fileURLWithPath: filePath)
-            log("destination", destination.absoluteURL)
-            try encryptedData.write(to: destination, options: .atomic)
-
-#if DEBUG
-            let fileUrl = URL(fileURLWithPath: filePath)
-            let fileName = fileUrl.lastPathComponent
-            let plainDirectoryUrl = fileUrl.deletingLastPathComponent().appendingPathComponent("plain", isDirectory: true)
-            createDirectory(path: plainDirectoryUrl.path)
-
-            let plainFilePath = plainDirectoryUrl.appendingPathComponent(fileName, isDirectory: false).path
-            try writePlainData(data, filePath: plainFilePath)
-#endif
-        } catch let aesError as DataCipher.AES.Error {
-            log("DataCipher.AES.encrypt AESError", aesError)
-        } catch {
-            log("Write to file error: \(error)")
-        }
-    }
-
     func readEncryptedData(filePath: String, salt: Data, iv: Data, password: String) -> Data? {
         do {
             let encryptedData = try Data(contentsOf: URL(fileURLWithPath: filePath))
-            let decryptContext = DecryptContext(encryptedData: encryptedData, salt: salt, iv: iv)
-            let data = try DataCipher.AES.decrypt(decryptContext: decryptContext, password: password)
+            let data = try AES.decrypt(
+                encryptedData: encryptedData,
+                salt: salt,
+                iv: iv,
+                password: password
+            )
             return data
-        } catch let aesError as DataCipher.AES.Error {
-            log("DataCipher.AES.decrypt AESError", aesError)
+        } catch let aesError as AES.Error {
+            log("AES.decrypt AESError", aesError)
             return nil
         } catch {
             log("URL cannot be read.", error)

@@ -8,16 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */; };
-		B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */; };
 		B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6171B16274D4B7500D19351 /* NSNotificationName+.swift */; };
-		B63EE322277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */; };
-		B63EE324277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */; };
-		B641B7FA277A2C480065217E /* DownloadContextRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */; };
+		B63BFB33277EA7F0005D8A51 /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB32277EA7F0005D8A51 /* Registry.swift */; };
+		B63BFB36277EA909005D8A51 /* RegistryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */; };
+		B63BFB3F277ED4C8005D8A51 /* DownloadManagerProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB3E277ED4C8005D8A51 /* DownloadManagerProviderKey.swift */; };
+		B63BFB44277F0883005D8A51 /* DownloadOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB43277F0883005D8A51 /* DownloadOperator.swift */; };
+		B63BFB46277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */; };
+		B63BFB48277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */; };
+		B63BFB4A277F1066005D8A51 /* RegistryOperatorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */; };
+		B63BFB4C277F10DF005D8A51 /* EncryptionOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */; };
+		B63BFB4E277F111F005D8A51 /* RegistryOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */; };
+		B63BFB54277F1D18005D8A51 /* DownloadManagerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63BFB53277F1D18005D8A51 /* DownloadManagerWrapper.swift */; };
+		B63EE324277C0697008C5632 /* EncryptedFileRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63EE323277C0697008C5632 /* EncryptedFileRepositoryTests.swift */; };
 		B641B7FE277A2FE30065217E /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = B641B7FD277A2FE30065217E /* .gitkeep */; };
 		B641B800277A31930065217E /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B641B7FF277A31930065217E /* Mock.swift */; };
-		B646FD7B2755153D0079802D /* DownloadSessionContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */; };
-		B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7C275518F00079802D /* DownloadContextRepository.swift */; };
-		B646FD7F27551A8C0079802D /* EncryptedFileContextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */; };
+		B646FD7F27551A8C0079802D /* EncryptedFileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646FD7E27551A8C0079802D /* EncryptedFileRepository.swift */; };
+		B6507ACE277E085B008F11CA /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6507ACD277E085B008F11CA /* AsyncOperation.swift */; };
 		B65A38C32778928F001B7F31 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C22778928F001B7F31 /* Injected.swift */; };
 		B65A38C5277892B2001B7F31 /* InjectedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C4277892B2001B7F31 /* InjectedValues.swift */; };
 		B65A38C7277892CC001B7F31 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A38C6277892CC001B7F31 /* InjectionKey.swift */; };
@@ -37,7 +43,7 @@
 		B65B3E8827401EB70060CF4A /* DataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = B65B3E7827401EB70060CF4A /* DataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B65B3E8B27401EB70060CF4A /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; };
 		B65B3E8C27401EB70060CF4A /* DataSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B65B3E7627401EB70060CF4A /* DataSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* DataCipher.swift */; };
+		B65B3E9A27401F190060CF4A /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9927401F190060CF4A /* AES.swift */; };
 		B65B3E9C274039420060CF4A /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9B274039420060CF4A /* ApplicationContainer.swift */; };
 		B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65B3E9E27403A2C0060CF4A /* Logger.swift */; };
 		B66585E427532BCF0019E845 /* RealmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66585E327532BCF0019E845 /* RealmDataStore.swift */; };
@@ -49,18 +55,18 @@
 		B665860B27534B1C0019E845 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B665860827534B1C0019E845 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B665860C27534B1C0019E845 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; };
 		B665860D27534B1C0019E845 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B665860927534B1C0019E845 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */; };
-		B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */; };
-		B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */; };
-		B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */; };
+		B66586102753AE4C0019E845 /* EncryptedFileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B665860F2753AE4C0019E845 /* EncryptedFileEntity.swift */; };
+		B6658D9E277CCDB800C79CAE /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658D9D277CCDB800C79CAE /* Array+.swift */; };
+		B6658DA1277CD9A700C79CAE /* OperationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DA0277CD9A700C79CAE /* OperationState.swift */; };
+		B6658DA3277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DA2277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift */; };
+		B6658DA5277CD9F300C79CAE /* EncryptorMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DA4277CD9F300C79CAE /* EncryptorMetadata.swift */; };
+		B6658DA7277CDA1200C79CAE /* PendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DA6277CDA1200C79CAE /* PendingOperations.swift */; };
+		B6658DA9277CDA5E00C79CAE /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DA8277CDA5E00C79CAE /* BackgroundDownloader.swift */; };
+		B6658DAB277CDAC900C79CAE /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DAA277CDAC900C79CAE /* Encryptor.swift */; };
+		B6658DAD277CDAED00C79CAE /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6658DAC277CDAED00C79CAE /* DownloadManager.swift */; };
+		B67600732778D27800319833 /* EncryptedFileRepositoryProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600722778D27800319833 /* EncryptedFileRepositoryProviderKey.swift */; };
 		B67600772778D3B000319833 /* BackgroundConfiguratorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */; };
 		B67600792778D5A200319833 /* RealmConfiguratorProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67600782778D5A200319833 /* RealmConfiguratorProviderKey.swift */; };
-		B676007B2778DA8B00319833 /* DownloadDataSourceProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */; };
-		FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB0275092C00009A168 /* DownloadContext.swift */; };
-		FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */; };
-		FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456785274FF4AD00E591B5 /* EncryptContext.swift */; };
-		FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC456789274FF8F200E591B5 /* DecryptContext.swift */; };
-		FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,16 +135,22 @@
 
 /* Begin PBXFileReference section */
 		B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfigurator.swift; sourceTree = "<group>"; };
-		B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSource.swift; sourceTree = "<group>"; };
 		B6171B16274D4B7500D19351 /* NSNotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+.swift"; sourceTree = "<group>"; };
-		B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryTests.swift; sourceTree = "<group>"; };
-		B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryTests.swift; sourceTree = "<group>"; };
-		B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepositoryTests.swift; sourceTree = "<group>"; };
+		B63BFB32277EA7F0005D8A51 /* Registry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registry.swift; sourceTree = "<group>"; };
+		B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryMetadata.swift; sourceTree = "<group>"; };
+		B63BFB3E277ED4C8005D8A51 /* DownloadManagerProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerProviderKey.swift; sourceTree = "<group>"; };
+		B63BFB43277F0883005D8A51 /* DownloadOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperator.swift; sourceTree = "<group>"; };
+		B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperatorProviderKey.swift; sourceTree = "<group>"; };
+		B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionOperatorProviderKey.swift; sourceTree = "<group>"; };
+		B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryOperatorProviderKey.swift; sourceTree = "<group>"; };
+		B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionOperator.swift; sourceTree = "<group>"; };
+		B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryOperator.swift; sourceTree = "<group>"; };
+		B63BFB53277F1D18005D8A51 /* DownloadManagerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerWrapper.swift; sourceTree = "<group>"; };
+		B63EE323277C0697008C5632 /* EncryptedFileRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileRepositoryTests.swift; sourceTree = "<group>"; };
 		B641B7FD277A2FE30065217E /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		B641B7FF277A31930065217E /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
-		B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepository.swift; sourceTree = "<group>"; };
-		B646FD7C275518F00079802D /* DownloadContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepository.swift; sourceTree = "<group>"; };
-		B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepository.swift; sourceTree = "<group>"; };
+		B646FD7E27551A8C0079802D /* EncryptedFileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileRepository.swift; sourceTree = "<group>"; };
+		B6507ACD277E085B008F11CA /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		B65A38C22778928F001B7F31 /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		B65A38C4277892B2001B7F31 /* InjectedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedValues.swift; sourceTree = "<group>"; };
 		B65A38C6277892CC001B7F31 /* InjectionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionKey.swift; sourceTree = "<group>"; };
@@ -161,7 +173,7 @@
 		B65B3E7827401EB70060CF4A /* DataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		B65B3E7927401EB70060CF4A /* DataSource.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DataSource.docc; sourceTree = "<group>"; };
 		B65B3E7F27401EB70060CF4A /* DataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B65B3E9927401F190060CF4A /* DataCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCipher.swift; sourceTree = "<group>"; };
+		B65B3E9927401F190060CF4A /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		B65B3E9B274039420060CF4A /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		B65B3E9E27403A2C0060CF4A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B66585D427532A5E0019E845 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -174,18 +186,18 @@
 		B66585FD27533DD00019E845 /* ExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExceptionHandler.m; sourceTree = "<group>"; };
 		B665860827534B1C0019E845 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		B665860927534B1C0019E845 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
-		B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContext.swift; sourceTree = "<group>"; };
-		B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
-		B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
-		B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileContextRepositoryProviderKey.swift; sourceTree = "<group>"; };
+		B665860F2753AE4C0019E845 /* EncryptedFileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileEntity.swift; sourceTree = "<group>"; };
+		B6658D9D277CCDB800C79CAE /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		B6658DA0277CD9A700C79CAE /* OperationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationState.swift; sourceTree = "<group>"; };
+		B6658DA2277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDownloaderMetadata.swift; sourceTree = "<group>"; };
+		B6658DA4277CD9F300C79CAE /* EncryptorMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptorMetadata.swift; sourceTree = "<group>"; };
+		B6658DA6277CDA1200C79CAE /* PendingOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingOperations.swift; sourceTree = "<group>"; };
+		B6658DA8277CDA5E00C79CAE /* BackgroundDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDownloader.swift; sourceTree = "<group>"; };
+		B6658DAA277CDAC900C79CAE /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
+		B6658DAC277CDAED00C79CAE /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		B67600722778D27800319833 /* EncryptedFileRepositoryProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedFileRepositoryProviderKey.swift; sourceTree = "<group>"; };
 		B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfiguratorProviderKey.swift; sourceTree = "<group>"; };
 		B67600782778D5A200319833 /* RealmConfiguratorProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmConfiguratorProviderKey.swift; sourceTree = "<group>"; };
-		B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataSourceProviderKey.swift; sourceTree = "<group>"; };
-		FC34BCB0275092C00009A168 /* DownloadContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadContext.swift; sourceTree = "<group>"; };
-		FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadSessionContext.swift; sourceTree = "<group>"; };
-		FC456785274FF4AD00E591B5 /* EncryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptContext.swift; sourceTree = "<group>"; };
-		FC456789274FF8F200E591B5 /* DecryptContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptContext.swift; sourceTree = "<group>"; };
-		FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptFileContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,12 +243,103 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B63BFB34277EA800005D8A51 /* AsyncOperation */ = {
+			isa = PBXGroup;
+			children = (
+				B6507ACD277E085B008F11CA /* AsyncOperation.swift */,
+			);
+			path = AsyncOperation;
+			sourceTree = "<group>";
+		};
+		B63BFB38277ECFB4005D8A51 /* BackgroundDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */,
+				B6658DA8277CDA5E00C79CAE /* BackgroundDownloader.swift */,
+			);
+			path = BackgroundDownloader;
+			sourceTree = "<group>";
+		};
+		B63BFB39277ECFCB005D8A51 /* Encryptor */ = {
+			isa = PBXGroup;
+			children = (
+				B6658DAA277CDAC900C79CAE /* Encryptor.swift */,
+			);
+			path = Encryptor;
+			sourceTree = "<group>";
+		};
+		B63BFB3A277ECFD9005D8A51 /* Registry */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB32277EA7F0005D8A51 /* Registry.swift */,
+			);
+			path = Registry;
+			sourceTree = "<group>";
+		};
+		B63BFB3B277ED2F9005D8A51 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB3C277ED302005D8A51 /* BackgroundDownloader */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
+		B63BFB3C277ED302005D8A51 /* BackgroundDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */,
+			);
+			path = BackgroundDownloader;
+			sourceTree = "<group>";
+		};
+		B63BFB3D277ED4AE005D8A51 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB3E277ED4C8005D8A51 /* DownloadManagerProviderKey.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B63BFB40277EEFD8005D8A51 /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				B65B3E9927401F190060CF4A /* AES.swift */,
+			);
+			path = AES;
+			sourceTree = "<group>";
+		};
+		B63BFB41277F0629005D8A51 /* Operator */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB43277F0883005D8A51 /* DownloadOperator.swift */,
+				B63BFB4B277F10DF005D8A51 /* EncryptionOperator.swift */,
+				B63BFB4D277F111F005D8A51 /* RegistryOperator.swift */,
+			);
+			path = Operator;
+			sourceTree = "<group>";
+		};
+		B63BFB42277F07FF005D8A51 /* Operator */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB45277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift */,
+				B63BFB47277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift */,
+				B63BFB49277F1066005D8A51 /* RegistryOperatorProviderKey.swift */,
+			);
+			path = Operator;
+			sourceTree = "<group>";
+		};
+		B63BFB52277F1D03005D8A51 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB53277F1D18005D8A51 /* DownloadManagerWrapper.swift */,
+			);
+			path = Wrapper;
+			sourceTree = "<group>";
+		};
 		B641B7F8277A2C320065217E /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B641B7F9277A2C480065217E /* DownloadContextRepositoryTests.swift */,
-				B63EE321277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift */,
-				B63EE323277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift */,
+				B63EE323277C0697008C5632 /* EncryptedFileRepositoryTests.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -252,8 +355,8 @@
 		B641B7FC277A2FD00065217E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				B641B7FF277A31930065217E /* Mock.swift */,
 				B641B7FD277A2FE30065217E /* .gitkeep */,
+				B641B7FF277A31930065217E /* Mock.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -261,9 +364,7 @@
 		B646FD79275514F10079802D /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B646FD7C275518F00079802D /* DownloadContextRepository.swift */,
-				B646FD7A2755153D0079802D /* DownloadSessionContextRepository.swift */,
-				B646FD7E27551A8C0079802D /* EncryptedFileContextRepository.swift */,
+				B646FD7E27551A8C0079802D /* EncryptedFileRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -298,8 +399,8 @@
 		B65A38C92778C087001B7F31 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				B67600742778D38F00319833 /* Remote */,
 				B65A38CA2778C090001B7F31 /* Local */,
+				B67600742778D38F00319833 /* Remote */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -358,6 +459,7 @@
 		B65B3DF1273FFA300060CF4A /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
+				B63BFB52277F1D03005D8A51 /* Wrapper */,
 				B65B3DF2273FFA300060CF4A /* AppDelegate.swift */,
 				B65B3DF4273FFA300060CF4A /* SceneDelegate.swift */,
 				B65B3DF6273FFA300060CF4A /* ViewController.swift */,
@@ -430,7 +532,7 @@
 		B65B3E9527401EE60060CF4A /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				B66585E027532B300019E845 /* FileDownload */,
+				B6658D9F277CD99400C79CAE /* DownloadOperator */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -458,7 +560,7 @@
 		B65B3E9827401F110060CF4A /* DataCipher */ = {
 			isa = PBXGroup;
 			children = (
-				B65B3E9927401F190060CF4A /* DataCipher.swift */,
+				B63BFB40277EEFD8005D8A51 /* AES */,
 			);
 			path = DataCipher;
 			sourceTree = "<group>";
@@ -482,10 +584,7 @@
 		B65B3EA3274114890060CF4A /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				B66585E127532B420019E845 /* FileDownload */,
-				FC456789274FF8F200E591B5 /* DecryptContext.swift */,
-				FC45678B274FF8F800E591B5 /* DecryptFileContext.swift */,
-				FC456785274FF4AD00E591B5 /* EncryptContext.swift */,
+				B66585E127532B420019E845 /* Realm */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -502,23 +601,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B66585E027532B300019E845 /* FileDownload */ = {
+		B66585E127532B420019E845 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				B6171B12274CF80D00D19351 /* BackgroundConfigurator.swift */,
-				B6171B14274CFA3F00D19351 /* DownloadDataSource.swift */,
+				B665860F2753AE4C0019E845 /* EncryptedFileEntity.swift */,
 			);
-			path = FileDownload;
-			sourceTree = "<group>";
-		};
-		B66585E127532B420019E845 /* FileDownload */ = {
-			isa = PBXGroup;
-			children = (
-				FC34BCB0275092C00009A168 /* DownloadContext.swift */,
-				FC34BCB2275092C90009A168 /* DownloadSessionContext.swift */,
-				B665860F2753AE4C0019E845 /* EncryptedFileContext.swift */,
-			);
-			path = FileDownload;
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		B66585E227532B590019E845 /* Realm */ = {
@@ -548,12 +636,60 @@
 			path = File;
 			sourceTree = "<group>";
 		};
+		B6658D9F277CD99400C79CAE /* DownloadOperator */ = {
+			isa = PBXGroup;
+			children = (
+				B6658DAE277CDB6400C79CAE /* Manager */,
+				B6658DAF277CDB7100C79CAE /* Operation */,
+				B6658DB0277CDB8400C79CAE /* OperationMetadata */,
+				B6658DB1277CDCD400C79CAE /* OperationState */,
+				B63BFB41277F0629005D8A51 /* Operator */,
+			);
+			path = DownloadOperator;
+			sourceTree = "<group>";
+		};
+		B6658DAE277CDB6400C79CAE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B6658DAC277CDAED00C79CAE /* DownloadManager.swift */,
+				B6658DA6277CDA1200C79CAE /* PendingOperations.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B6658DAF277CDB7100C79CAE /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				B63BFB34277EA800005D8A51 /* AsyncOperation */,
+				B63BFB38277ECFB4005D8A51 /* BackgroundDownloader */,
+				B63BFB39277ECFCB005D8A51 /* Encryptor */,
+				B63BFB3A277ECFD9005D8A51 /* Registry */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
+		B6658DB0277CDB8400C79CAE /* OperationMetadata */ = {
+			isa = PBXGroup;
+			children = (
+				B6658DA2277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift */,
+				B6658DA4277CD9F300C79CAE /* EncryptorMetadata.swift */,
+				B63BFB35277EA909005D8A51 /* RegistryMetadata.swift */,
+			);
+			path = OperationMetadata;
+			sourceTree = "<group>";
+		};
+		B6658DB1277CDCD400C79CAE /* OperationState */ = {
+			isa = PBXGroup;
+			children = (
+				B6658DA0277CD9A700C79CAE /* OperationState.swift */,
+			);
+			path = OperationState;
+			sourceTree = "<group>";
+		};
 		B676006D2778CF8400319833 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B67600702778D10A00319833 /* DownloadContextRepositoryProviderKey.swift */,
-				B676006E2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift */,
-				B67600722778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift */,
+				B67600722778D27800319833 /* EncryptedFileRepositoryProviderKey.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -561,23 +697,25 @@
 		B67600742778D38F00319833 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				B67600752778D39B00319833 /* FileDownload */,
+				B67600752778D39B00319833 /* DownloadOperator */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
 		};
-		B67600752778D39B00319833 /* FileDownload */ = {
+		B67600752778D39B00319833 /* DownloadOperator */ = {
 			isa = PBXGroup;
 			children = (
-				B67600762778D3B000319833 /* BackgroundConfiguratorProviderKey.swift */,
-				B676007A2778DA8B00319833 /* DownloadDataSourceProviderKey.swift */,
+				B63BFB3D277ED4AE005D8A51 /* Manager */,
+				B63BFB3B277ED2F9005D8A51 /* Operation */,
+				B63BFB42277F07FF005D8A51 /* Operator */,
 			);
-			path = FileDownload;
+			path = DownloadOperator;
 			sourceTree = "<group>";
 		};
 		FC9F7CD227531F7400E88383 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B6658D9D277CCDB800C79CAE /* Array+.swift */,
 				B6171B16274D4B7500D19351 /* NSNotificationName+.swift */,
 			);
 			path = Extension;
@@ -793,6 +931,7 @@
 				B65B3DF7273FFA300060CF4A /* ViewController.swift in Sources */,
 				B65B3DF3273FFA300060CF4A /* AppDelegate.swift in Sources */,
 				B65B3DF5273FFA300060CF4A /* SceneDelegate.swift in Sources */,
+				B63BFB54277F1D18005D8A51 /* DownloadManagerWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,37 +956,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6658DA3277CD9C100C79CAE /* BackgroundDownloaderMetadata.swift in Sources */,
+				B6658DA7277CDA1200C79CAE /* PendingOperations.swift in Sources */,
+				B6658DAB277CDAC900C79CAE /* Encryptor.swift in Sources */,
 				B65A38C7277892CC001B7F31 /* InjectionKey.swift in Sources */,
-				B646FD7B2755153D0079802D /* DownloadSessionContextRepository.swift in Sources */,
-				FC456786274FF4AD00E591B5 /* EncryptContext.swift in Sources */,
+				B63BFB46277F0EB3005D8A51 /* DownloadOperatorProviderKey.swift in Sources */,
+				B6658D9E277CCDB800C79CAE /* Array+.swift in Sources */,
 				B65A38C32778928F001B7F31 /* Injected.swift in Sources */,
-				B65B3E9A27401F190060CF4A /* DataCipher.swift in Sources */,
+				B65B3E9A27401F190060CF4A /* AES.swift in Sources */,
+				B63BFB4A277F1066005D8A51 /* RegistryOperatorProviderKey.swift in Sources */,
+				B6658DA9277CDA5E00C79CAE /* BackgroundDownloader.swift in Sources */,
 				B67600792778D5A200319833 /* RealmConfiguratorProviderKey.swift in Sources */,
-				B67600732778D27800319833 /* EncryptedFileContextRepositoryProviderKey.swift in Sources */,
-				B67600712778D10A00319833 /* DownloadContextRepositoryProviderKey.swift in Sources */,
+				B63BFB33277EA7F0005D8A51 /* Registry.swift in Sources */,
+				B63BFB36277EA909005D8A51 /* RegistryMetadata.swift in Sources */,
+				B6658DAD277CDAED00C79CAE /* DownloadManager.swift in Sources */,
+				B67600732778D27800319833 /* EncryptedFileRepositoryProviderKey.swift in Sources */,
+				B6658DA5277CD9F300C79CAE /* EncryptorMetadata.swift in Sources */,
 				B67600772778D3B000319833 /* BackgroundConfiguratorProviderKey.swift in Sources */,
-				B676006F2778CF9600319833 /* DownloadSessionContextRepositoryProviderKey.swift in Sources */,
-				B646FD7D275518F00079802D /* DownloadContextRepository.swift in Sources */,
 				B65A38D02778CAFE001B7F31 /* RealmDataStoreProviderKey.swift in Sources */,
 				B66585FF27533DD00019E845 /* ExceptionHandler.m in Sources */,
+				B63BFB44277F0883005D8A51 /* DownloadOperator.swift in Sources */,
 				B65B3E7A27401EB70060CF4A /* DataSource.docc in Sources */,
-				B646FD7F27551A8C0079802D /* EncryptedFileContextRepository.swift in Sources */,
+				B63BFB3F277ED4C8005D8A51 /* DownloadManagerProviderKey.swift in Sources */,
+				B646FD7F27551A8C0079802D /* EncryptedFileRepository.swift in Sources */,
 				B66585F927533D8E0019E845 /* ExceptionCatchable.swift in Sources */,
-				FC34BCB3275092C90009A168 /* DownloadSessionContext.swift in Sources */,
-				FC34BCB1275092C00009A168 /* DownloadContext.swift in Sources */,
 				B66585F6275335120019E845 /* RealmConfigurator.swift in Sources */,
 				B65B3E9C274039420060CF4A /* ApplicationContainer.swift in Sources */,
-				B6171B15274CFA3F00D19351 /* DownloadDataSource.swift in Sources */,
 				B66585E427532BCF0019E845 /* RealmDataStore.swift in Sources */,
-				FC45678A274FF8F200E591B5 /* DecryptContext.swift in Sources */,
-				FC45678C274FF8F800E591B5 /* DecryptFileContext.swift in Sources */,
 				B65A38C5277892B2001B7F31 /* InjectedValues.swift in Sources */,
 				B65A38CD2778C0B7001B7F31 /* ApplicationContainerProviderKey.swift in Sources */,
-				B66586102753AE4C0019E845 /* EncryptedFileContext.swift in Sources */,
+				B66586102753AE4C0019E845 /* EncryptedFileEntity.swift in Sources */,
 				B6171B13274CF80D00D19351 /* BackgroundConfigurator.swift in Sources */,
 				B6171B17274D4B7500D19351 /* NSNotificationName+.swift in Sources */,
 				B65B3E9F27403A2C0060CF4A /* Logger.swift in Sources */,
-				B676007B2778DA8B00319833 /* DownloadDataSourceProviderKey.swift in Sources */,
+				B63BFB4C277F10DF005D8A51 /* EncryptionOperator.swift in Sources */,
+				B63BFB48277F0FC1005D8A51 /* EncryptionOperatorProviderKey.swift in Sources */,
+				B6507ACE277E085B008F11CA /* AsyncOperation.swift in Sources */,
+				B6658DA1277CD9A700C79CAE /* OperationState.swift in Sources */,
+				B63BFB4E277F111F005D8A51 /* RegistryOperator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,9 +1001,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B641B7FA277A2C480065217E /* DownloadContextRepositoryTests.swift in Sources */,
-				B63EE322277B73B2008C5632 /* DownloadSessionContextRepositoryTests.swift in Sources */,
-				B63EE324277C0697008C5632 /* EncryptedFileContextRepositoryTests.swift in Sources */,
+				B63EE324277C0697008C5632 /* EncryptedFileRepositoryTests.swift in Sources */,
 				B641B800277A31930065217E /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

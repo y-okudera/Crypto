@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BackgroundConfiguratorProviding {
+public protocol BackgroundConfiguratorProviding {
     func configuration(identifier: String) -> URLSessionConfiguration
 }
 

@@ -1,5 +1,5 @@
 //
-//  EncryptedFileContext.swift
+//  EncryptedFileEntity.swift
 //  DataSource
 //
 //  Created by Yuki Okudera on 2021/11/28.
@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-final class EncryptedFileContext: RealmSwift.Object {
+final class EncryptedFileEntity: RealmSwift.Object {
     @objc dynamic var filePath: String = ""
     @objc dynamic var contentId: Int = 0
     @objc dynamic var index: Int = 0

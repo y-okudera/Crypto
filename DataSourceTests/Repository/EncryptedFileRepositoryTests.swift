@@ -1,5 +1,5 @@
 //
-//  EncryptedFileContextRepositoryTests.swift
+//  EncryptedFileRepositoryTests.swift
 //  DataSourceTests
 //
 //  Created by Yuki Okudera on 2021/12/29.
@@ -10,7 +10,7 @@ import XCTest
 
 final class EncryptedFileContextRepositoryTests: XCTestCase {
 
-    private let sut = EncryptedFileContextRepository()
+    private let sut = EncryptedFileRepository()
     private let realmDataStoreProvidingMock = RealmDataStoreProvidingMock()
 
     override func setUp() {
@@ -31,7 +31,7 @@ final class EncryptedFileContextRepositoryTests: XCTestCase {
 
         // Verify
         XCTAssertEqual(realmDataStoreProvidingMock.updateCallCount, 1)
-        guard let updateArgValue = realmDataStoreProvidingMock.updateArgValues[0].0 as? EncryptedFileContext else {
+        guard let updateArgValue = realmDataStoreProvidingMock.updateArgValues[0].0 as? EncryptedFileEntity else {
             XCTFail("updateArgValues is empty")
             return
         }
